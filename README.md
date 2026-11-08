@@ -1,6 +1,6 @@
 # HETIC — Planning du parcours projet
 
-Un parcours de six mois pour progresser en IA et machine learning, construire un MVP par équipe et le confronter à de vrais clients. Pilotage : **Mously**. Mously apporte théorie, pratique et suivi sur **30 % du volume pédagogique total** : **25 % de cours** et **5 % de coaching**. Une soutenance blanche en M5 prépare la démonstration finale, qui associe pitch, MVP, retours clients et captation vidéo.
+Un parcours de six mois pour apprendre à concevoir et créer une application, progresser en IA/ML et construire un MVP confronté à de vrais clients. La cybersécurité représente **5 % du volume pédagogique total**. Pilotage : **Mously**. Mously apporte théorie, pratique et suivi sur **30 % du volume pédagogique total** : **25 % de cours** et **5 % de coaching**. Une soutenance blanche en M5 prépare la démonstration finale, qui associe pitch, MVP, retours clients et captation vidéo.
 
 Le site reprend la navigation et la grille de cartes de l'application de référence `MATRICE/planning-app`. Il fonctionne sans compte, mot de passe, backend ni dépendance à installer.
 
@@ -37,20 +37,27 @@ Les cartes ont un mois pédagogique et un décalage `dayOffset`. Lorsqu'une date
 
 Les créneaux calculés, l'affectation détaillée des blocs et les compléments IA/ML restent des propositions à valider. Les fenêtres d'intervention du programme initial sont conservées. Michel intervient dans la limite de **8 jours maximum** sur M1 à M3. Les interventions de Mously représentent **30 % du volume pédagogique total** : **25 % de cours de théorie et pratique** et **5 % de coaching**. Cette ventilation conserve les 5 % de coaching initiaux ; le nombre d’heures sera calculé lorsque le volume total sera connu. Le nombre de cartes ne permet pas de vérifier à lui seul cette répartition.
 
+## Design des applications, puis vibe coding
+
+La théorie et la pratique guidée précèdent la génération assistée du code : **M1 design et maquettes → M2 architecture et première application guidée → M3 vibe coding → M4 déploiement → M5 soutenance blanche → M6 clients**. Chaque apprenant doit pouvoir expliquer l’application, diagnostiquer un problème et réaliser une petite modification. Les cartes `requires` expriment les prérequis ; les contrôles vérifient leur ordre dans le planning.
+
+La cybersécurité couvre les risques et les données, la conception, le code, le déploiement et la revue du MVP dans les **5 % du volume total**. Cette part porte sur un contenu ; les 30 % de Mously portent sur un intervenant. L’affectation des heures cyber reste à établir et ces parts ne s’additionnent pas automatiquement. Le rôle « Cybersécurité · à affecter » ne désigne pas une personne confirmée.
+
 ## Soutenance blanche des MVP — M5
 
-Mously, Dany et l’équipe technique accompagnent une soutenance blanche avant le Demo Day. Chaque équipe présente le problème client, démontre son MVP, explique ses choix IA/ML et leurs limites, puis répond aux questions. Les retours sont priorisés dans un plan de corrections et repris avant la démonstration finale de M6. Cette répétition pédagogique ne remplace pas les essais auprès de vrais clients.
+Mously, Dany et l’équipe technique accompagnent une soutenance blanche avant le Demo Day. Chaque équipe présente le problème client, démontre son MVP, explique le design, l’architecture, les choix IA/ML et les mesures de sécurité, puis réalise une modification ou un diagnostic ciblé en répondant aux questions. Les retours sont priorisés dans un plan de corrections et repris avant la démonstration finale de M6. Cette répétition pédagogique ne remplace pas les essais auprès de vrais clients.
 
 ## Cartes mentales
 
-La rubrique « Cartes mentales » propose deux schémas :
+La rubrique « Cartes mentales » propose trois schémas :
 
 - [Vision du projet](docs/assets/carte-vision.svg) : besoin client, données et IA/ML, MVP, apprentissage, six mois et Demo Day.
+- [Du design à l’application](docs/assets/carte-application.svg) : comprendre et construire avant le vibe coding.
 - [Équipe et rôles](docs/assets/carte-equipe.svg) : Mously au pilotage et les responsabilités des intervenants.
 
 Les boutons permettent de passer d'un schéma à l'autre. Les schémas s'ouvrent en grand et se téléchargent en SVG, un format vectoriel réutilisable dans une présentation. Sur petit écran, ils se parcourent horizontalement.
 
-Le bouton **Imprimer / PDF** utilise l'impression du navigateur. Le planning reflète la vue et les filtres sélectionnés au moment de l'impression ; les deux cartes mentales sont incluses. Pour un document complet de référence, utiliser aussi [le programme texte](docs/parcours-hetic.md).
+Le bouton **Imprimer / PDF** utilise l'impression du navigateur. Le planning reflète la vue et les filtres sélectionnés au moment de l'impression ; les trois cartes mentales sont incluses. Pour un document complet de référence, utiliser aussi [le programme texte](docs/parcours-hetic.md).
 
 ## Modifier le projet depuis la console
 
@@ -68,12 +75,12 @@ Cet exemple illustre la syntaxe d'une demande : il ne fixe pas la date réelle d
 
 | Fichier | Rôle |
 | --- | --- |
-| `docs/assets/planning-data.js` | Date de début, six mois, intervenants, couleurs et blocs d'intervention |
+| `docs/assets/planning-data.js` | Date de début, répartitions, objectifs IA/ML, applications et cyber, prérequis et interventions |
 | `docs/assets/planning-model.js` | Calcul des dates et périodes, recherche et filtres |
 | `docs/assets/app.js` | Navigation, rendu des cartes, fenêtres de détail et sélection des schémas |
 | `docs/index.html` | Structure de la page, repères, tableau des intervenants et livrables |
 | `docs/assets/styles.css` et `planning.css` | Mise en forme, mobile et impression |
-| `docs/assets/carte-vision.svg` et `carte-equipe.svg` | Schémas vectoriels |
+| `docs/assets/carte-vision.svg`, `carte-application.svg` et `carte-equipe.svg` | Schémas vectoriels |
 | `docs/parcours-hetic.md` | Programme pédagogique lisible et téléchargeable |
 | `docs/pilotage-ia-mvp.md` | Décisions, hypothèses et état des preuves |
 | `skills/evoluer-projet-ia-mvp/SKILL.md` | Critères de progression IA/ML et de valeur client |
@@ -88,7 +95,7 @@ Avec Node.js 18 ou une version ultérieure, sans installation de paquet :
 node scripts/check-planning.cjs
 ```
 
-Ce contrôle vérifie la cohérence des données, les dates, les changements de semaine et de mois, les filtres et les ressources locales. Il ne remplace pas une vérification dans le navigateur.
+Ce contrôle vérifie la cohérence des données, les dates, les changements de semaine et de mois, l’ordre des prérequis avant le vibe coding, les filtres et les ressources locales. Il ne remplace pas une vérification dans le navigateur.
 
 Avant de valider une évolution du calendrier, parcourir les trois vues, tester les flèches, combiner les filtres, ouvrir une carte, utiliser le clavier, consulter sur mobile et vérifier l'aperçu d'impression. Tester aussi une période sans intervention et le retour au début du parcours.
 

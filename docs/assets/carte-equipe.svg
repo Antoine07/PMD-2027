@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 820" role="img" aria-labelledby="title desc">
 <title id="title">Une équipe, des responsabilités complémentaires.</title>
-<desc id="desc">Mously : 30 % au total (25 % cours + 5 % coaching). Michel : 8 jours maximum.. Michel · M1 à M3: Théorie et culture, Fondements et compréhension, 8 jours maximum; Antoine · M2 à M4: Algorithmique et mathématiques, Python et manipulation des données, Interfaces du MVP; Yaaqoub · M3 à M5: API et architecture applicative, Intégration technique, Connexion des briques du MVP; Sion · M4 à M5: DevOps minimal, Déploiement du MVP, Conditions d’usage du pilote; Dany · M1, M3, M5, M6: Gestion de projet, Priorisation et suivi, Soutenance blanche · M5; Production · M6: Captation de la démonstration, Storytelling du parcours, Film étudiants, HETIC, partenaires</desc>
+<desc id="desc">Mously : 30 % au total (25 % cours + 5 % coaching). Michel : 8 jours maximum.. Michel · M1 à M3: Théorie, culture et design, Fondements et compréhension, 8 jours maximum; Antoine · M2 à M4: Algorithmique et mathématiques, Python et manipulation des données, Architecture et application guidée; Yaaqoub · M3 à M5: API et architecture applicative, Intégration technique, Connexion des briques du MVP; Sion · M4 à M5: DevOps minimal, Déploiement du MVP, Conditions d’usage du pilote; Dany · M1, M3, M5, M6: Gestion de projet, Priorisation et suivi, Soutenance blanche · M5; Production · M6: Captation de la démonstration, Storytelling du parcours, Film étudiants, HETIC, partenaires; Cybersécurité : 5 % du volume total, intervenant et affectation des heures à préciser, risques, conception, code, déploiement et revue du MVP.</desc>
 <rect width="1400" height="820" fill="#fbfafc"/>
 <style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif}.branch{fill:none;stroke-width:3;opacity:.6}.label{font-size:20px;font-weight:650;letter-spacing:-.4px}.copy{font-size:16px;fill:#7c6b88}.center-copy{font-size:18px;fill:#e5dcfa}</style>
 <text x="60" y="55" fill="#514160" font-size="28" font-weight="700" letter-spacing="-.7">Une équipe, des responsabilités complémentaires.</text>
@@ -10,7 +10,7 @@
 <rect x="55" y="140" width="360" height="160" rx="14" fill="white" stroke="#9878c9" stroke-opacity=".35"/>
 <rect x="75" y="162" width="5" height="23" rx="2" fill="#9878c9"/>
 <text class="label" x="93" y="181" fill="#9878c9">Michel · M1 à M3</text>
-<text class="copy" x="77" y="216">Théorie et culture</text>
+<text class="copy" x="77" y="216">Théorie, culture et design</text>
 <text class="copy" x="77" y="242">Fondements et compréhension</text>
 <text class="copy" x="77" y="268">8 jours maximum</text>
 <path class="branch" stroke="#4e927a" d="M 570 445 C 480 445 510 423 415 423"/>
@@ -20,7 +20,7 @@
 <text class="label" x="93" y="386" fill="#4e927a">Antoine · M2 à M4</text>
 <text class="copy" x="77" y="421">Algorithmique et mathématiques</text>
 <text class="copy" x="77" y="447">Python et manipulation des données</text>
-<text class="copy" x="77" y="473">Interfaces du MVP</text>
+<text class="copy" x="77" y="473">Architecture et application guidée</text>
 <path class="branch" stroke="#a78436" d="M 570 445 C 480 445 510 628 415 628"/>
 <circle cx="415" cy="628" r="5" fill="#a78436"/>
 <rect x="55" y="550" width="360" height="160" rx="14" fill="white" stroke="#a78436" stroke-opacity=".35"/>
@@ -57,5 +57,5 @@
 <text x="700" y="416" text-anchor="middle" fill="white" font-size="29" font-weight="750">Mously</text>
 <text class="center-copy" x="700" y="449" text-anchor="middle">Théorie, pratique et suivi</text>
 <text class="center-copy" x="700" y="475" text-anchor="middle">30 % au total · M1 à M6</text>
-<text x="60" y="785" fill="#a291ad" font-size="12">HETIC · Parcours professionnel sur 6 mois · Proposition de travail</text>
+<path d="M700 515V650" stroke="#73a2a9" stroke-width="3" fill="none"/><rect x="510" y="650" width="380" height="92" rx="12" fill="#edf6f7" stroke="#bed7db"/><text x="700" y="678" text-anchor="middle" font-size="18" fill="#387e88" font-weight="650">Cybersécurité · 5 %</text><text x="700" y="704" text-anchor="middle" font-size="14" fill="#6e9299">Intervenant et heures à affecter</text><text x="700" y="726" text-anchor="middle" font-size="13" fill="#6e9299">Risques, conception, code, déploiement, revue</text><text x="60" y="785" fill="#a291ad" font-size="12">HETIC · Parcours professionnel sur 6 mois · Proposition de travail</text>
 </svg>

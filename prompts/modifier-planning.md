@@ -12,7 +12,7 @@ REMPLACER CE PARAGRAPHE par le changement précis : contenu, intervenant, mois, 
 2. `README.md` et `docs/pilotage-ia-mvp.md`.
 3. `docs/assets/planning-data.js`, puis les seuls fichiers concernés par la demande.
 
-Le produit est un planning documentaire HETIC, consultable sans authentification, avec une navigation par semaine, mois et six mois, des filtres, des cartes d'intervention et deux cartes mentales SVG. Le parcours vise une progression IA/ML et un MVP confronté à de vrais clients.
+Le produit est un planning documentaire HETIC, consultable sans authentification, avec une navigation par semaine, mois et six mois, des filtres, des cartes d'intervention et trois cartes mentales SVG. Le parcours vise la capacité à concevoir et créer une application, une progression IA/ML, 5 % de cybersécurité et un MVP confronté à de vrais clients.
 
 ## Réalisation attendue
 
@@ -21,6 +21,9 @@ Le produit est un planning documentaire HETIC, consultable sans authentification
 - `startDate` est une date ISO `AAAA-MM-JJ` ou `null`. Le champ de date dans l'interface est temporaire ; une date partagée doit être inscrite dans ce fichier.
 - `allocation` porte la répartition de Mously : 30 % du volume total, avec 25 % de cours de théorie et pratique et 5 % de coaching. Si une demande change ces valeurs, maintenir leur cohérence et synchroniser les supports concernés. Le nombre de cartes n'est pas un volume horaire.
 - Le M5 comprend une soutenance blanche des MVP, puis une reprise des retours avant le Demo Day en M6. Préserver cette préparation, sauf modification explicite demandée.
+- La cybersécurité représente 5 % du volume pédagogique total (`allocation.cyber`). Cette proportion porte sur un contenu, tandis que les 30 % de Mously portent sur un intervenant : ne pas les additionner automatiquement. L'affectation des heures cyber reste à préciser ; « Cybersécurité · à affecter » est un rôle à pourvoir, pas une personne confirmée.
+- Préserver l'ordre pédagogique : design et maquettes en M1, architecture et première application guidée en M2, puis vibe coding en M3. Les champs `requires` des cartes expriment ces prérequis dans le calendrier. Si une date ou un mois change, vérifier aussi ces dépendances.
+- Les objectifs mensuels `apps` et `cyber` complètent l'IA/ML. La soutenance blanche doit vérifier la capacité à expliquer, diagnostiquer et modifier une application, ainsi que les mesures de sécurité mises en place.
 - Pour déplacer un bloc, adapter `month`, `dayOffset` ou `date` selon la demande. Une date individuelle renseignée prend priorité sur le calcul ; si l'on souhaite à nouveau un calcul relatif, remettre `date` à `null`. Ne pas laisser une ancienne date explicite contredire le déplacement demandé.
 - Vérifier la compatibilité avec les fenêtres d'intervention. Signaler une contradiction réelle dans la demande ; ne pas inventer une disponibilité, un horaire, un volume ou une confirmation.
 - Mettre à jour `docs/index.html`, `docs/parcours-hetic.md`, les schémas SVG et `README.md` seulement si les informations qu'ils affichent changent. Les rôles et pourcentages sont présents dans plusieurs supports : les garder cohérents.

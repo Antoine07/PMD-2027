@@ -2,6 +2,8 @@
 
 Accompagner le parcours HETIC sur six mois : faire progresser les étudiants en IA/ML et construire un MVP utile à de vrais clients. Évaluer les évolutions sur ces deux critères, avec des preuves d'apprentissage et d'usage.
 
+Les apprenants doivent savoir concevoir et créer une application. Placer la théorie du design et de l’architecture, puis une première construction guidée, avant le vibe coding. Intégrer 5 % du volume pédagogique total en cybersécurité ; conserver les 30 % d’intervention de Mously. L’affectation des heures cyber aux intervenants reste à préciser.
+
 ## Skill du projet
 
 Pour cadrer le produit, prioriser une évolution, conduire une expérimentation IA/ML ou préparer et analyser un pilote client, lire et appliquer [evoluer-projet-ia-mvp](skills/evoluer-projet-ia-mvp/SKILL.md).

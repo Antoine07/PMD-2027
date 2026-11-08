@@ -53,6 +53,14 @@ Conserver une preuve tangible : code ou notebook exécutable, données ou proven
 
 ## Construire le MVP autour d'un usage client
 
+Pour ce parcours HETIC, faire acquérir la capacité à concevoir et créer une application, en complément de l'IA/ML. Placer les parcours utilisateurs, les maquettes, les états d'interface et les échanges entre interface, API et données avant le vibe coding. Prévoir une première construction guidée permettant de lire, modifier et expliquer le code avant de déléguer sa génération à un assistant.
+
+Traiter le vibe coding comme une pratique à étudier après ces bases : partir d'une spécification, relire les propositions, tester et corriger. Vérifier la compréhension par une modification ou un diagnostic expliqué par l'apprenant ; une application générée qui fonctionne ne suffit pas comme preuve de maîtrise.
+
+Intégrer la cybersécurité à hauteur de 5 % du volume pédagogique total : risques et données, sécurité dans la conception, entrées et accès, secrets et déploiement, puis revue du MVP. Ce volume décrit un contenu pédagogique ; les 30 % de Mously décrivent une charge d'intervention. Ne pas les additionner automatiquement ni en déduire des heures sans ventilation connue. L'affectation des interventions cyber reste à confirmer.
+
+Inclure design, architecture, capacité à modifier l'application et mesures de sécurité dans la soutenance blanche de M5, avec des corrections avant le Demo Day.
+
 Définir un segment accessible, un problème concret, sa fréquence, la solution actuelle et la personne qui décide ou paie. Réduire le MVP à un parcours complet qui apporte une valeur observable : entrée réelle, traitement, résultat utilisable et retour du client.
 
 Une prestation manuelle ou un prototype assisté peut vérifier le problème avant d'automatiser. Décrire honnêtement la part manuelle. Éviter l'infrastructure et les fonctions périphériques tant qu'elles ne sont pas nécessaires à l'usage ou à l'expérience en cours.

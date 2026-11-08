@@ -15,22 +15,37 @@ assert.equal(plan.school, 'HETIC');
 assert.equal(plan.months.length, 6);
 assert.equal(plan.allocation.mouslyTotal, plan.allocation.cours + plan.allocation.coaching, 'Répartition des interventions de Mously incohérente');
 assert(plan.allocation.mouslyTotal > 0 && plan.allocation.mouslyTotal <= 100);
+assert.equal(plan.allocation.cyber, 5, 'La cybersécurité doit représenter 5 % du volume total');
 assert(plan.startDate === null || model.isDate(plan.startDate), 'Date de début ISO invalide');
 const trainers = new Set(plan.trainers.map(person => person.id));
 assert.equal(trainers.size, plan.trainers.length, 'Identifiant intervenant dupliqué');
 const ids = new Set();
 for (const person of plan.trainers) assert(/^#[0-9a-f]{6}$/i.test(person.color), `Couleur invalide : ${person.id}`);
-for (const month of plan.months) for (const field of ['title', 'people', 'program', 'learning', 'client', 'deliverable']) assert.equal(typeof month[field], 'string', `Champ de mois manquant : ${field}`);
+for (const month of plan.months) for (const field of ['title', 'people', 'program', 'learning', 'apps', 'cyber', 'client', 'deliverable']) assert.equal(typeof month[field], 'string', `Champ de mois manquant : ${field}`);
 for (const session of plan.sessions) {
   assert(!ids.has(session.id), `Identifiant dupliqué : ${session.id}`); ids.add(session.id);
   assert(Number.isInteger(session.month) && session.month >= 1 && session.month <= 6, `Mois invalide : ${session.id}`);
-  assert(['cours', 'coaching', 'projet', 'demo'].includes(session.category));
+  assert(['cours', 'coaching', 'projet', 'cyber', 'demo'].includes(session.category));
   assert(session.trainers.length && session.trainers.every(id => trainers.has(id)), `Intervenant inconnu : ${session.id}`);
   assert(session.title && session.description, `Contenu manquant : ${session.id}`);
   assert.equal(typeof session.addition, 'boolean');
   assert(Number.isInteger(session.dayOffset) && session.dayOffset >= 0 && session.dayOffset <= 24, `Décalage hors du mois : ${session.id}`);
   assert(session.date === null || model.isDate(session.date), `Date individuelle invalide : ${session.id}`);
 }
+const byId = new Map(plan.sessions.map(session => [session.id, session]));
+for (const session of plan.sessions) {
+  for (const requiredId of session.requires || []) {
+    const required = byId.get(requiredId);
+    assert(required, `Prérequis inconnu : ${requiredId}`);
+    assert(required.month < session.month || (required.month === session.month && required.dayOffset < session.dayOffset), `Prérequis placé après ${session.id} : ${requiredId}`);
+    for (const start of ['2027-01-04', '2027-01-31', '2028-02-29']) {
+      assert(model.sessionDate(required, start) < model.sessionDate(session, start), `Dates contraires à l'ordre pédagogique : ${requiredId} avant ${session.id}`);
+    }
+  }
+}
+const vibe = byId.get('m3-vibe-coding');
+assert(vibe && ['m1-design-apps', 'm2-architecture-apps', 'm2-app-guidee'].every(id => vibe.requires.includes(id)), 'Le design, l’architecture et une application guidée doivent précéder le vibe coding');
+assert(plan.sessions.some(session => session.category === 'cyber'), 'Contenus cyber absents');
 const rehearsal = plan.sessions.find(session => session.id === 'm5-soutenance-blanche');
 const corrections = plan.sessions.find(session => session.id === 'm5-corrections-soutenance');
 assert(rehearsal && corrections, 'Soutenance blanche ou reprise des retours absente');
@@ -88,7 +103,7 @@ for (const match of html.matchAll(/<(?:a|script|link|img)\b[^>]*(?:href|src)="([
 for (const match of read('docs/assets/app.js').matchAll(/\$\('([^']+)'\)/g)) assert(htmlIds.includes(match[1]), `Cible de l'interface absente : ${match[1]}`);
 assert(!html.includes('PMD'), 'Ancien nom présent dans la page');
 assert(!read('docs/parcours-hetic.md').includes('PMD'), 'Ancien nom présent dans le programme');
-for (const file of ['carte-vision.svg', 'carte-equipe.svg']) {
+for (const file of ['carte-vision.svg', 'carte-application.svg', 'carte-equipe.svg']) {
   const svg = read(`docs/assets/${file}`);
   assert(svg.includes('<title') && svg.includes('<desc') && svg.includes('HETIC'));
 }

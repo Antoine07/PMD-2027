@@ -9,10 +9,10 @@
   })();
   const initialStart = calendar.isDate(plan.startDate) ? plan.startDate : null;
   const state = { view: 'course', index: 0, start: initialStart, cursor: initialStart || today, search: '', trainer: '', category: 'all' };
-  const categories = { cours: 'Cours & ateliers', coaching: 'Coaching', projet: 'Projet & clients', demo: 'Demo Day' };
-  $('course-share').textContent = String(plan.allocation.cours);
-  $('coaching-share').textContent = String(plan.allocation.coaching);
-  $('allocation-note').textContent = `Mously : ${plan.allocation.mouslyTotal} % du volume total, répartis en ${plan.allocation.cours} % de cours de théorie et pratique et ${plan.allocation.coaching} % de coaching.`;
+  const categories = { cours: 'Cours & ateliers', coaching: 'Coaching', projet: 'Projet & clients', cyber: 'Cybersécurité', demo: 'Demo Day' };
+  $('mously-share').textContent = String(plan.allocation.mouslyTotal);
+  $('cyber-share').textContent = String(plan.allocation.cyber);
+  $('allocation-note').textContent = `Mously : ${plan.allocation.mouslyTotal} % du volume total (${plan.allocation.cours} % théorie/pratique + ${plan.allocation.coaching} % coaching). Contenu cybersécurité : ${plan.allocation.cyber} % du volume total ; affectation des heures aux intervenants à préciser.`;
   const format = (value, options = { day: 'numeric', month: 'short' }) => calendar.parse(value).toLocaleDateString('fr-FR', { ...options, timeZone: 'UTC' });
   const element = (tag, className, content) => {
     const node = document.createElement(tag);
@@ -25,7 +25,7 @@
   function selectMonth(index) {
     state.index = index;
     const month = plan.months[index];
-    const values = { badge: `M${index + 1}`, title: month.title, people: month.people, program: month.program, learning: month.learning, client: month.client, deliverable: month.deliverable };
+    const values = { badge: `M${index + 1}`, title: month.title, people: month.people, program: month.program, learning: month.learning, apps: month.apps, cyber: month.cyber, client: month.client, deliverable: month.deliverable };
     Object.entries(values).forEach(([key, value]) => { $(`month-${key}`).textContent = value; });
     document.querySelectorAll('[data-select-month]').forEach(button => {
       const selected = Number(button.dataset.selectMonth) === index;
@@ -42,6 +42,8 @@
     $('dialog-trainers').textContent = trainerNames(session);
     $('dialog-description').textContent = session.description;
     $('dialog-learning').textContent = plan.months[session.month - 1].learning;
+    $('dialog-apps').textContent = plan.months[session.month - 1].apps;
+    $('dialog-cyber').textContent = plan.months[session.month - 1].cyber;
     $('dialog-client').textContent = plan.months[session.month - 1].client;
     if (typeof $('intervention-dialog').showModal === 'function') $('intervention-dialog').showModal();
     else $('month-detail').scrollIntoView({ block: 'nearest' });
@@ -212,7 +214,7 @@
     document.querySelectorAll('[data-map]').forEach(item => {
       item.setAttribute('aria-pressed', String(item === button)); item.classList.toggle('selected', item === button);
     });
-    $('map-vision').hidden = map !== 'vision'; $('map-equipe').hidden = map !== 'equipe';
+    document.querySelectorAll('[data-map]').forEach(item => { $(`map-${item.dataset.map}`).hidden = item.dataset.map !== map; });
     $('map-download').href = `assets/carte-${map}.svg`;
   }));
   if ('IntersectionObserver' in window) {

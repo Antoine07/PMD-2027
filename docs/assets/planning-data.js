@@ -1,61 +1,75 @@
 // Source du planning HETIC. Les dates et créneaux calculés restent des propositions.
-// Mously : 30 % du volume total, répartis en 25 % de cours et 5 % de coaching.
+// Mously : 30 % du volume total (25 % cours + 5 % coaching). Contenu cybersécurité : 5 %.
+// Ces pourcentages décrivent deux axes ; l’affectation des heures cyber reste à établir.
 window.HETIC_PLANNING = {
   "school": "HETIC",
   "startDate": null,
   "allocation": {
     "mouslyTotal": 30,
     "cours": 25,
-    "coaching": 5
+    "coaching": 5,
+    "cyber": 5
   },
   "months": [
     {
       "title": "Cadrage des projets",
       "people": "Mously · Dany · Michel",
-      "program": "Besoins clients, gestion de projet, culture et fondements théoriques. Théorie et pratique appliquées au projet avec Mously.",
+      "program": "Besoins clients, gestion de projet, culture et fondements théoriques. Théorie du design d’applications : parcours, écrans, états et données. Introduction aux risques cyber. Théorie et pratique avec Mously.",
       "learning": "Formuler un problème et identifier les données nécessaires. Expliquer dans quels cas l’IA est pertinente et définir une solution de référence simple.",
       "client": "Rencontrer des personnes du segment visé. Documenter leur problème, leur pratique actuelle et les conditions d’un premier essai.",
-      "deliverable": "Une fiche projet : problème, segment client, données accessibles et hypothèse de valeur."
+      "deliverable": "Une fiche projet, un parcours utilisateur, des maquettes et une première carte des données et risques.",
+      "apps": "Décrire les utilisateurs et leurs tâches, dessiner un parcours et des maquettes simples, prévoir les états de chargement, d’erreur et de réussite. Justifier le design avant de générer du code.",
+      "cyber": "Identifier les données à protéger, les accès nécessaires et les risques principaux du projet. La cybersécurité représente 5 % du volume pédagogique total sur le parcours."
     },
     {
       "title": "Fondations techniques",
       "people": "Mously · Antoine · Michel",
-      "program": "Algorithmique, mathématiques, Python. Théorie et pratique appliquées au projet avec Mously.",
+      "program": "Algorithmique, mathématiques et Python. Théorie des applications : client/serveur, HTTP, interfaces, API, données et tests. Première application guidée avant le vibe coding. Sécurité dès la conception.",
       "learning": "Préparer et explorer des données en Python. Construire une première approche simple, choisir une métrique et séparer entraînement et évaluation lorsque le modèle le nécessite.",
       "client": "Vérifier avec un client que les cas étudiés représentent son besoin et que les données sont disponibles et autorisées pour l’usage prévu.",
-      "deliverable": "Un notebook reproductible, une référence simple et des premiers résultats dont les limites sont expliquées."
+      "deliverable": "Un schéma d’architecture, une petite application explicable, un notebook reproductible et des critères de test.",
+      "apps": "Expliquer le rôle du frontend, du backend, de l’API et du stockage. Dessiner leurs échanges et construire une petite application guidée avec un formulaire, un traitement et une persistance de données.",
+      "cyber": "Définir les droits selon les usages, limiter les données collectées et repérer les menaces dans les échanges de l’application. Prévoir les contrôles avant de coder."
     },
     {
       "title": "Développement du MVP",
       "people": "Mously · Antoine · Yaaqoub",
-      "program": "Interfaces, architecture et API. Théorie et pratique appliquées au projet avec Mously.",
+      "program": "Interfaces, architecture et API. Vibe coding après les bases de design et une première construction guidée : spécifier, générer, relire, tester et corriger. Validation des entrées et contrôle des accès.",
       "learning": "Relier une approche IA/ML pertinente à une interface et une API. Expliquer le chemin des données et reproduire un résultat de bout en bout.",
       "client": "Faire essayer le premier parcours utilisable à des personnes du segment visé. Observer la tâche accomplie et consigner les obstacles.",
-      "deliverable": "Un premier MVP de bout en bout et des observations d’usage, avec la part manuelle explicitée."
+      "deliverable": "Un MVP utilisable, son architecture documentée, des tests et un relevé des premières observations clients.",
+      "apps": "Construire une application de bout en bout. Utiliser le vibe coding à partir d’un design et d’une architecture explicités, puis relire, tester et modifier le code proposé. Réaliser une modification ciblée en expliquant son raisonnement.",
+      "cyber": "Contrôler les entrées, les accès et les erreurs ; utiliser des requêtes paramétrées si le projet utilise une base de données. Vérifier le code généré sur les mêmes critères que le code écrit par l’équipe."
     },
     {
       "title": "Intégration technique",
       "people": "Mously · Yaaqoub · Sion",
-      "program": "API, intégration et DevOps minimal. Théorie et pratique appliquées au projet avec Mously.",
+      "program": "API, intégration et DevOps minimal. Déploiement de l’application, configuration, secrets, accès et vérifications de sécurité avant le pilote.",
       "learning": "Déployer une version accessible pour le pilote. Mesurer la qualité, la latence et le coût si ces facteurs conditionnent l’usage ; traiter les erreurs principales.",
       "client": "Préparer un essai dans les conditions du client, puis observer l’utilisation d’une version accessible avec des données autorisées.",
-      "deliverable": "Une version déployée pour le pilote, une procédure de lancement et un protocole d’essai."
+      "deliverable": "Une application déployée pour le pilote, une procédure reproductible et une revue des accès et secrets.",
+      "apps": "Déployer et configurer l’application, diagnostiquer un échec et reproduire le parcours complet. Expliquer comment l’interface, l’API, les données et le traitement IA/ML fonctionnent ensemble.",
+      "cyber": "Séparer configuration et secrets, vérifier les accès et les dépendances, prévoir HTTPS pour le déploiement et éviter d’exposer des données sensibles dans les journaux."
     },
     {
       "title": "Finalisation, tests et soutenance blanche",
       "people": "Mously · Dany · Équipe technique",
-      "program": "Tests utilisateurs, améliorations, théorie et pratique avec Mously, soutenance blanche et préparation du Demo Day.",
-      "learning": "Analyser les échecs et comparer une version améliorée à la référence sur les mêmes cas. Lors de la soutenance blanche, expliquer les choix, reproduire la démonstration et répondre aux questions sur le MVP.",
+      "program": "Tests utilisateurs, améliorations et revue de sécurité du MVP. Soutenance blanche : design, architecture, application, IA/ML, sécurité et retours clients. Corrections avant le Demo Day.",
+      "learning": "Analyser les erreurs et comparer les versions IA/ML sur les mêmes cas. À la soutenance blanche, expliquer les résultats, le design et l’architecture de l’application, répondre aux questions et réaliser une évolution ciblée.",
       "client": "Faire réaliser une tâche concrète et recueillir des retours datés. Mesurer selon le projet le temps gagné, la qualité acceptable ou la réutilisation.",
-      "deliverable": "Un MVP stabilisé, un bilan des essais clients, une soutenance blanche et un plan de corrections avant le Demo Day."
+      "deliverable": "Un MVP stabilisé, des preuves d’apprentissage, un bilan client, une revue de sécurité et un plan de corrections issu de la soutenance blanche.",
+      "apps": "Démontrer une application fonctionnelle et expliquer son design, son architecture et son code. Lors de la soutenance blanche, diagnostiquer un problème et réaliser une petite évolution en justifiant la démarche.",
+      "cyber": "Tester les cas d’erreur et les accès non autorisés pertinents sur le propre MVP de l’équipe. Prioriser les corrections et documenter les risques qui restent à traiter."
     },
     {
       "title": "Démonstration clients",
       "people": "Toute l’équipe · Société de production",
-      "program": "Pitch, MVP, retours clients, captation vidéo. Théorie et pratique appliquées au projet avec Mously.",
+      "program": "Pitch, démonstration de l’application et du MVP IA/ML, explication du design, de l’architecture et des mesures de sécurité, retours clients et captation vidéo.",
       "learning": "Expliquer les choix techniques, reproduire la démonstration et présenter les limites. Montrer les preuves de compréhension recueillies pendant le parcours.",
       "client": "Présenter le MVP à des clients invités et recueillir leurs retours. Distinguer intérêt exprimé, intention d’achat et engagement réellement observé.",
-      "deliverable": "Un MVP fonctionnel par équipe, une présentation, des retours clients documentés et un film du parcours."
+      "deliverable": "Une application MVP fonctionnelle par équipe, une démonstration explicable, des retours clients et le film du parcours.",
+      "apps": "Présenter et reproduire l’application de bout en bout. Expliquer les décisions de design, le rôle du code généré et ce que chaque apprenant sait modifier et maintenir.",
+      "cyber": "Présenter les mesures réellement mises en place, les vérifications effectuées et les limites résiduelles. Ne pas présenter une application comme totalement sécurisée à partir d’une simple démonstration."
     }
   ],
   "trainers": [
@@ -112,6 +126,12 @@ window.HETIC_PLANNING = {
       "name": "Société de production",
       "initials": "PR",
       "color": "#ad5980"
+    },
+    {
+      "id": "cyber",
+      "name": "Cybersécurité · à affecter",
+      "initials": "CY",
+      "color": "#387e88"
     }
   ],
   "sessions": [
@@ -142,6 +162,20 @@ window.HETIC_PLANNING = {
       "date": null
     },
     {
+      "id": "m1-design-apps",
+      "month": 1,
+      "title": "Théorie du design des applications",
+      "category": "cours",
+      "trainers": [
+        "mously",
+        "michel"
+      ],
+      "description": "Étudier le besoin, les parcours utilisateurs, la hiérarchie des écrans, les états d’interface et les données. Produire des maquettes justifiées avant la génération de code.",
+      "addition": false,
+      "dayOffset": 4,
+      "date": null
+    },
+    {
       "id": "m1-mously-cours",
       "month": 1,
       "title": "Théorie et pratique : du besoin au projet",
@@ -163,6 +197,19 @@ window.HETIC_PLANNING = {
         "dany"
       ],
       "description": "Organiser le travail en équipe, les jalons et les premières décisions.",
+      "addition": false,
+      "dayOffset": 8,
+      "date": null
+    },
+    {
+      "id": "m1-cyber-fondations",
+      "month": 1,
+      "title": "Cyber : données, risques et usages",
+      "category": "cyber",
+      "trainers": [
+        "cyber"
+      ],
+      "description": "Identifier les données sensibles, les accès nécessaires et les risques du projet. Poser les bons réflexes de protection dans le périmètre de 5 % de cybersécurité du parcours.",
       "addition": false,
       "dayOffset": 8,
       "date": null
@@ -246,6 +293,23 @@ window.HETIC_PLANNING = {
       "date": null
     },
     {
+      "id": "m2-architecture-apps",
+      "month": 2,
+      "title": "Théorie des applications et architecture",
+      "category": "cours",
+      "trainers": [
+        "mously",
+        "antoine"
+      ],
+      "description": "Expliquer client/serveur, HTTP, frontend, backend, API et stockage. Dessiner les échanges et définir les cas de test d’une application simple.",
+      "addition": false,
+      "dayOffset": 10,
+      "date": null,
+      "requires": [
+        "m1-design-apps"
+      ]
+    },
+    {
       "id": "m2-4",
       "month": 2,
       "title": "Première référence IA/ML",
@@ -257,6 +321,39 @@ window.HETIC_PLANNING = {
       "addition": true,
       "dayOffset": 12,
       "date": null
+    },
+    {
+      "id": "m2-cyber-design",
+      "month": 2,
+      "title": "Cyber : sécurité dès la conception",
+      "category": "cyber",
+      "trainers": [
+        "cyber"
+      ],
+      "description": "Repérer les menaces dans le schéma de l’application, définir les droits par usage et limiter les données collectées. Prévoir les contrôles dans le design.",
+      "addition": false,
+      "dayOffset": 13,
+      "date": null,
+      "requires": [
+        "m1-cyber-fondations",
+        "m1-design-apps"
+      ]
+    },
+    {
+      "id": "m2-app-guidee",
+      "month": 2,
+      "title": "Construire une première application guidée",
+      "category": "projet",
+      "trainers": [
+        "antoine"
+      ],
+      "description": "Construire un formulaire, un traitement et une persistance de données. Lire, modifier et expliquer le code avec un accompagnement pédagogique avant de déléguer la génération à un assistant.",
+      "addition": false,
+      "dayOffset": 18,
+      "date": null,
+      "requires": [
+        "m2-architecture-apps"
+      ]
     },
     {
       "id": "m2-coaching",
@@ -337,6 +434,26 @@ window.HETIC_PLANNING = {
       "date": null
     },
     {
+      "id": "m3-vibe-coding",
+      "month": 3,
+      "title": "Vibe coding après le design des apps",
+      "category": "cours",
+      "trainers": [
+        "mously",
+        "antoine"
+      ],
+      "description": "Partir des maquettes et de l’architecture pour formuler une demande à un assistant de code. Relire la proposition, tester, déboguer et justifier les changements. Évaluer la compréhension par une évolution ciblée expliquée par l’apprenant.",
+      "addition": false,
+      "dayOffset": 14,
+      "date": null,
+      "requires": [
+        "m1-design-apps",
+        "m2-architecture-apps",
+        "m2-app-guidee",
+        "m2-cyber-design"
+      ]
+    },
+    {
       "id": "m3-5",
       "month": 3,
       "title": "Premier essai client",
@@ -348,6 +465,22 @@ window.HETIC_PLANNING = {
       "addition": true,
       "dayOffset": 16,
       "date": null
+    },
+    {
+      "id": "m3-cyber-code",
+      "month": 3,
+      "title": "Cyber : entrées, accès et code généré",
+      "category": "cyber",
+      "trainers": [
+        "cyber"
+      ],
+      "description": "Vérifier la validation des entrées, les autorisations et la gestion des erreurs. Utiliser des requêtes paramétrées selon le projet et relire les propositions de code de l’assistant.",
+      "addition": false,
+      "dayOffset": 18,
+      "date": null,
+      "requires": [
+        "m2-cyber-design"
+      ]
     },
     {
       "id": "m3-coaching",
@@ -400,6 +533,22 @@ window.HETIC_PLANNING = {
       "addition": true,
       "dayOffset": 8,
       "date": null
+    },
+    {
+      "id": "m4-cyber-deploiement",
+      "month": 4,
+      "title": "Cyber : déploiement, secrets et configuration",
+      "category": "cyber",
+      "trainers": [
+        "cyber"
+      ],
+      "description": "Séparer les secrets de la configuration, vérifier les accès et dépendances, prévoir HTTPS et des journaux sans données sensibles pour le pilote.",
+      "addition": false,
+      "dayOffset": 9,
+      "date": null,
+      "requires": [
+        "m3-cyber-code"
+      ]
     },
     {
       "id": "m4-4",
@@ -495,6 +644,22 @@ window.HETIC_PLANNING = {
       "date": null
     },
     {
+      "id": "m5-cyber-revue",
+      "month": 5,
+      "title": "Cyber : revue du MVP avant la soutenance",
+      "category": "cyber",
+      "trainers": [
+        "cyber"
+      ],
+      "description": "Vérifier les cas d’erreur et les accès pertinents sur l’application de l’équipe, corriger les points bloquants et consigner les limites avant la soutenance blanche.",
+      "addition": false,
+      "dayOffset": 14,
+      "date": null,
+      "requires": [
+        "m4-cyber-deploiement"
+      ]
+    },
+    {
       "id": "m5-mously-cours",
       "month": 5,
       "title": "Théorie et pratique : évaluer le MVP",
@@ -517,10 +682,14 @@ window.HETIC_PLANNING = {
         "dany",
         "technique"
       ],
-      "description": "Chaque équipe présente son MVP, réalise une démonstration reproductible et répond aux questions sur ses choix techniques, ses limites et les retours clients. Le jury pédagogique propose des corrections prioritaires avant le Demo Day.",
+      "description": "Chaque équipe présente le besoin et le design de l’application, explique son architecture, démontre le MVP et justifie les choix IA/ML et de sécurité. Une petite évolution ou un diagnostic ciblé permet d’observer la compréhension du code. Le jury propose des corrections avant le Demo Day.",
       "addition": false,
       "dayOffset": 18,
-      "date": null
+      "date": null,
+      "requires": [
+        "m3-vibe-coding",
+        "m5-cyber-revue"
+      ]
     },
     {
       "id": "m5-corrections-soutenance",
@@ -531,7 +700,7 @@ window.HETIC_PLANNING = {
         "mously",
         "technique"
       ],
-      "description": "Prioriser les retours de la soutenance blanche, corriger les points bloquants du MVP et répéter le parcours de démonstration avant la présentation aux clients.",
+      "description": "Prioriser les retours de la soutenance blanche, corriger le parcours et les problèmes de sécurité identifiés, puis répéter la démonstration de l’application.",
       "addition": false,
       "dayOffset": 21,
       "date": null
@@ -584,7 +753,7 @@ window.HETIC_PLANNING = {
       "trainers": [
         "equipe"
       ],
-      "description": "Montrer un parcours complet et expliquer les choix techniques aux clients invités.",
+      "description": "Démontrer une application MVP complète devant les clients et expliquer les décisions de design, d’architecture, d’IA/ML et de sécurité avec leurs limites.",
       "addition": false,
       "dayOffset": 4,
       "date": null

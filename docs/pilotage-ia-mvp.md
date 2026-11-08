@@ -3,13 +3,13 @@
 ## Cadrage connu
 
 - **Public :** étudiants du parcours HETIC ; niveaux et prérequis à préciser.
-- **Objectif :** progresser en IA/ML en réalisant un MVP par équipe, confronté à de vrais clients puis présenté lors d'un Demo Day filmé.
+- **Objectif :** concevoir et créer une application, progresser en IA/ML et en cybersécurité en réalisant un MVP par équipe, confronté à de vrais clients puis présenté lors d'un Demo Day filmé.
 - **Organisation proposée :** six mois, pilotage Mously, Mously à 30 % du volume pédagogique total, ventilés en 25 % de cours de théorie et pratique et 5 % de coaching.
 - **État :** proposition pédagogique mise en forme dans `docs/index.html`, avec une version texte dans `docs/parcours-hetic.md`. Aucun MVP étudiant ni retour client n'a été fourni à ce stade.
 
 ## Cycle actuel — rendre le parcours concret et consultable
 
-- **Livrable :** site documentaire HETIC local sans authentification, planning de cartes par intervenant, vues semaine/mois/six mois, navigation entre périodes, filtres combinés et détails des interventions. Deux cartes mentales SVG présentent la vision et les rôles. Un README et un prompt dans `prompts/modifier-planning.md` documentent les évolutions depuis la console.
+- **Livrable :** site documentaire HETIC local sans authentification, planning de cartes par intervenant, vues semaine/mois/six mois, navigation entre périodes, filtres combinés et détails des interventions. Trois cartes mentales SVG présentent la vision, la progression du design vers l’application et les rôles. Un README et un prompt dans `prompts/modifier-planning.md` documentent les évolutions depuis la console.
 - **Référence visuelle :** application locale `MATRICE/planning-app` ; navigation latérale, palette violette et grille de planning. Aucun compte, contenu privé ou mécanisme d'authentification repris.
 - **Hypothèse à vérifier :** le parcours permet aux étudiants et intervenants d'identifier le travail attendu chaque mois et de distinguer apprentissage technique et validation client.
 - **Dates :** aucune date de début réelle fournie ; la valeur versionnée reste `null`. Les M1 à M6 sont explorables sans date. La saisie temporaire d'un début permet de calculer des créneaux proposés ; aucune date affichée par ce mécanisme n'est une confirmation.
@@ -24,6 +24,13 @@
 - Renforcer les interventions de Mously en théorie et pratique sur les six mois, avec un total de 30 %. La ventilation retenue conserve 5 % de coaching et porte les cours à 25 % ; les heures restent à établir à partir du volume total.
 - Ajouter une soutenance blanche en M5, accompagnée par Mously, Dany et l’équipe technique, puis un temps de correction avant le Demo Day de M6.
 - Synchroniser le planning, le programme, les cartes mentales, le README et le prompt de modification.
+
+## Conception d’applications et cybersécurité
+
+- La cybersécurité représente 5 % du volume pédagogique total, de la conception à la revue du MVP. L’affectation des heures reste à établir ; le rôle cyber est indiqué comme à affecter. Cette proportion décrit un contenu et ne s’additionne pas automatiquement aux 30 % d’un intervenant.
+- Avant le vibe coding de M3 : théorie du design et maquettes en M1, architecture et première application guidée en M2. Les prérequis sont inscrits dans les cartes.
+- Vérifier la capacité individuelle à expliquer, diagnostiquer et modifier une application. La soutenance blanche de M5 couvre aussi le design, l’architecture et les mesures de sécurité, avant correction et Demo Day.
+- Aucun acquis ni test de sécurité réel sur un MVP étudiant n’est attesté à ce stade.
 
 ## Prochaine décision proposée
 

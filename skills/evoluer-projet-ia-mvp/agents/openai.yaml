@@ -1,0 +1,4 @@
+interface:
+  display_name: "Faire évoluer le projet IA / MVP"
+  short_description: "Progresser en IA/ML avec un MVP et de vrais clients"
+  default_prompt: "Utilise $evoluer-projet-ia-mvp pour choisir et réaliser la prochaine étape du projet, avec un objectif de compétence IA/ML et une validation auprès de vrais clients."

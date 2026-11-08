@@ -1,0 +1,57 @@
+# Système
+.DS_Store
+._*
+Thumbs.db
+Desktop.ini
+
+# Éditeurs
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Variables d'environnement et configuration locale
+.env
+.env.*
+!.env.example
+!.env.*.example
+.local/
+
+# Node.js et fichiers générés
+node_modules/
+dist/
+build/
+.next/
+out/
+.nuxt/
+.output/
+.vite/
+*.tsbuildinfo
+
+# Python et notebooks
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+*.egg-info/
+
+# Rapports de tests et couverture
+coverage/
+.coverage
+.coverage.*
+htmlcov/
+playwright-report/
+test-results/
+
+# Journaux, caches et fichiers temporaires
+*.log
+.cache/
+.npm/
+tmp/
+temp/
+*.tmp

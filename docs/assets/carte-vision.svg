@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 820" role="img" aria-labelledby="title desc">
+<title id="title">Un projet, deux progrès à rendre visibles.</title>
+<desc id="desc">Des compétences IA/ML et une valeur client à démontrer, du cadrage au Demo Day.. Comprendre le besoin: Un segment client accessible, Un problème et une pratique actuelle, Entretiens et retours documentés; Expérimenter avec les données: Python, maths et données autorisées, Une référence simple et des métriques, Des erreurs et des limites expliquées; Construire le MVP: Interfaces, architecture et API, Un parcours complet et utilisable, Intégration et DevOps minimal; Prouver l’apprentissage: Reproduire une expérience, Modifier et expliquer son code, Distinguer assistance et maîtrise; Avancer sur six mois: M1 cadrer · M2 poser les bases, M3 construire · M4 intégrer, M5 tests et soutenance blanche; Rencontrer les clients: Essais clients pendant le parcours, M6 Demo Day : MVP et retours, Un film pour valoriser le travail</desc>
+<rect width="1400" height="820" fill="#fbfafc"/>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif}.branch{fill:none;stroke-width:3;opacity:.6}.label{font-size:20px;font-weight:650;letter-spacing:-.4px}.copy{font-size:16px;fill:#7c6b88}.center-copy{font-size:18px;fill:#e5dcfa}</style>
+<text x="60" y="55" fill="#514160" font-size="28" font-weight="700" letter-spacing="-.7">Un projet, deux progrès à rendre visibles.</text>
+<text x="60" y="85" fill="#9682a4" font-size="15">Des compétences IA/ML et une valeur client à démontrer, du cadrage au Demo Day.</text>
+<path class="branch" stroke="#9878c9" d="M 570 445 C 480 445 510 218 415 218"/>
+<circle cx="415" cy="218" r="5" fill="#9878c9"/>
+<rect x="55" y="140" width="360" height="160" rx="14" fill="white" stroke="#9878c9" stroke-opacity=".35"/>
+<rect x="75" y="162" width="5" height="23" rx="2" fill="#9878c9"/>
+<text class="label" x="93" y="181" fill="#9878c9">Comprendre le besoin</text>
+<text class="copy" x="77" y="216">Un segment client accessible</text>
+<text class="copy" x="77" y="242">Un problème et une pratique actuelle</text>
+<text class="copy" x="77" y="268">Entretiens et retours documentés</text>
+<path class="branch" stroke="#4e927a" d="M 570 445 C 480 445 510 423 415 423"/>
+<circle cx="415" cy="423" r="5" fill="#4e927a"/>
+<rect x="55" y="345" width="360" height="160" rx="14" fill="white" stroke="#4e927a" stroke-opacity=".35"/>
+<rect x="75" y="367" width="5" height="23" rx="2" fill="#4e927a"/>
+<text class="label" x="93" y="386" fill="#4e927a">Expérimenter avec les données</text>
+<text class="copy" x="77" y="421">Python, maths et données autorisées</text>
+<text class="copy" x="77" y="447">Une référence simple et des métriques</text>
+<text class="copy" x="77" y="473">Des erreurs et des limites expliquées</text>
+<path class="branch" stroke="#a78436" d="M 570 445 C 480 445 510 628 415 628"/>
+<circle cx="415" cy="628" r="5" fill="#a78436"/>
+<rect x="55" y="550" width="360" height="160" rx="14" fill="white" stroke="#a78436" stroke-opacity=".35"/>
+<rect x="75" y="572" width="5" height="23" rx="2" fill="#a78436"/>
+<text class="label" x="93" y="591" fill="#a78436">Construire le MVP</text>
+<text class="copy" x="77" y="626">Interfaces, architecture et API</text>
+<text class="copy" x="77" y="652">Un parcours complet et utilisable</text>
+<text class="copy" x="77" y="678">Intégration et DevOps minimal</text>
+<path class="branch" stroke="#5486b0" d="M 830 445 C 920 445 890 218 985 218"/>
+<circle cx="985" cy="218" r="5" fill="#5486b0"/>
+<rect x="985" y="140" width="360" height="160" rx="14" fill="white" stroke="#5486b0" stroke-opacity=".35"/>
+<rect x="1005" y="162" width="5" height="23" rx="2" fill="#5486b0"/>
+<text class="label" x="1023" y="181" fill="#5486b0">Prouver l’apprentissage</text>
+<text class="copy" x="1007" y="216">Reproduire une expérience</text>
+<text class="copy" x="1007" y="242">Modifier et expliquer son code</text>
+<text class="copy" x="1007" y="268">Distinguer assistance et maîtrise</text>
+<path class="branch" stroke="#ad6e91" d="M 830 445 C 920 445 890 423 985 423"/>
+<circle cx="985" cy="423" r="5" fill="#ad6e91"/>
+<rect x="985" y="345" width="360" height="160" rx="14" fill="white" stroke="#ad6e91" stroke-opacity=".35"/>
+<rect x="1005" y="367" width="5" height="23" rx="2" fill="#ad6e91"/>
+<text class="label" x="1023" y="386" fill="#ad6e91">Avancer sur six mois</text>
+<text class="copy" x="1007" y="421">M1 cadrer · M2 poser les bases</text>
+<text class="copy" x="1007" y="447">M3 construire · M4 intégrer</text>
+<text class="copy" x="1007" y="473">M5 tests et soutenance blanche</text>
+<path class="branch" stroke="#8176ac" d="M 830 445 C 920 445 890 628 985 628"/>
+<circle cx="985" cy="628" r="5" fill="#8176ac"/>
+<rect x="985" y="550" width="360" height="160" rx="14" fill="white" stroke="#8176ac" stroke-opacity=".35"/>
+<rect x="1005" y="572" width="5" height="23" rx="2" fill="#8176ac"/>
+<text class="label" x="1023" y="591" fill="#8176ac">Rencontrer les clients</text>
+<text class="copy" x="1007" y="626">Essais clients pendant le parcours</text>
+<text class="copy" x="1007" y="652">M6 Demo Day : MVP et retours</text>
+<text class="copy" x="1007" y="678">Un film pour valoriser le travail</text>
+<rect x="570" y="375" width="260" height="140" rx="20" fill="#6c58d5"/>
+<text x="700" y="416" text-anchor="middle" fill="white" font-size="29" font-weight="750">HETIC</text>
+<text class="center-copy" x="700" y="449" text-anchor="middle">IA/ML × MVP clients</text>
+<text class="center-copy" x="700" y="475" text-anchor="middle">Apprendre par le projet</text>
+<text x="60" y="785" fill="#a291ad" font-size="12">HETIC · Parcours professionnel sur 6 mois · Proposition de travail</text>
+</svg>

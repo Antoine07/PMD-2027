@@ -37,3 +37,11 @@
 Préciser le volume horaire total, les prérequis, le calendrier HETIC et l'accès à des clients. Choisir ensuite pour chaque équipe un problème, une compétence IA/ML à acquérir, une première référence simple et un protocole d'essai avec un critère de décision fixé avant l'expérience.
 
 Ne pas déduire de cette présentation que des clients sont recrutés, qu'un pilote est accepté ou que les étudiants maîtrisent déjà les compétences visées.
+
+## Ajustement de la répartition des intervenants
+
+La limite de jours pour Michel a été supprimée à la demande de l’utilisateur. Sa fenêtre d’intervention reste M1 à M3 ; le volume est à définir dans la ventilation pédagogique.
+
+## Lisibilité du parcours sur six mois
+
+La carte mentale du parcours met en évidence un premier MVP utilisable visé dès M3. M4 à M6 sont consacrés aux essais clients, aux corrections et à la consolidation, avec une soutenance blanche en M5 et le Demo Day en M6. Le design et une première application guidée précèdent le vibe coding. Cette trajectoire reste à adapter au volume horaire et au niveau initial ; elle ne constitue pas une garantie de résultat.

@@ -10,7 +10,7 @@
 
 - **Mously : 30 % du volume total**, avec 25 % de cours de théorie et pratique et 5 % de coaching.
 - **Cybersécurité : 5 % du volume total**, répartis sur le cadrage, la conception, le code, le déploiement et la revue du MVP.
-- **Michel : 8 jours maximum**, sur M1 à M3.
+- **Michel :** théorie, culture et fondements du design sur M1 à M3.
 
 La part de Mously décrit une charge d’intervention ; la cybersécurité décrit un contenu pédagogique. L’affectation des heures cyber reste à préciser : ces pourcentages ne s’additionnent pas automatiquement. Le rôle « Cybersécurité · à affecter » ne désigne pas un intervenant confirmé. Les heures seront établies lorsque le volume total sera connu ; le nombre de cartes ne mesure pas ces pourcentages.
 
@@ -129,7 +129,7 @@ Les retours du jury pédagogique alimentent un plan de corrections avant le Demo
 | Intervenant | Responsabilité | Période |
 | --- | --- | --- |
 | Mously | Pilotage, théorie et pratique : 25 % cours + 5 % coaching, soit 30 % au total | M1 à M6 |
-| Michel | Théorie, culture et fondements du design, 8 jours maximum | M1 à M3 |
+| Michel | Théorie, culture et fondements du design | M1 à M3 |
 | Antoine | Algorithmique, maths, Python, architecture, interfaces et première application guidée | M2 à M4 |
 | Yaaqoub | API et intégration | M3 à M5 |
 | Sion | DevOps minimal, déploiement | M4 à M5 |
@@ -137,12 +137,12 @@ Les retours du jury pédagogique alimentent un plan de corrections avant le Demo
 | Cybersécurité · à affecter | Contenu cyber : 5 % du volume total, affectation des heures à confirmer | M1 à M5 |
 | Société de production | Captation et storytelling | M6 |
 
-Les périodes sont des fenêtres d’intervention ; le planning met en avant les intervenants principaux. La ventilation fine reste à établir, dans la limite de 8 jours maximum pour Michel. L’affectation détaillée des nouveaux contenus reste une proposition de travail.
+Les périodes sont des fenêtres d’intervention ; le planning met en avant les intervenants principaux. La ventilation fine reste à établir. L’affectation détaillée des nouveaux contenus reste une proposition de travail.
 
 ## Cartes mentales
 
 - [Vision du projet](assets/carte-vision.svg) : clients, données, applications, apprentissage, cybersécurité et démonstration.
-- [Du design à l’application](assets/carte-application.svg) : la progression pédagogique, avec le design et la première application avant le vibe coding.
+- [Six mois vers le MVP](assets/carte-application.svg) : design et application guidée avant le vibe coding, premier MVP utilisable visé en M3, puis essais clients, soutenance blanche et Demo Day.
 - [Équipe et rôles](assets/carte-equipe.svg) : responsabilités, fenêtres d’intervention et affectation cyber à préciser.
 
 ## Livrable final — Demo Day

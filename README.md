@@ -35,7 +35,7 @@ Pour partager une date de début avec tous les lecteurs, modifier `startDate` da
 
 Les cartes ont un mois pédagogique et un décalage `dayOffset`. Lorsqu'une date de début est renseignée, le site calcule une **date proposée**, avec report au lundi si le jour calculé tombe un week-end. Une date individuelle peut être renseignée dans `date` ; elle prend alors la priorité sur le calcul. Aucun horaire ou volume n'est déduit de ces cartes. Elles représentent des blocs de contenu, pas un décompte des séances réelles.
 
-Les créneaux calculés, l'affectation détaillée des blocs et les compléments IA/ML restent des propositions à valider. Les fenêtres d'intervention du programme initial sont conservées. Michel intervient dans la limite de **8 jours maximum** sur M1 à M3. Les interventions de Mously représentent **30 % du volume pédagogique total** : **25 % de cours de théorie et pratique** et **5 % de coaching**. Cette ventilation conserve les 5 % de coaching initiaux ; le nombre d’heures sera calculé lorsque le volume total sera connu. Le nombre de cartes ne permet pas de vérifier à lui seul cette répartition.
+Les créneaux calculés, l'affectation détaillée des blocs et les compléments IA/ML restent des propositions à valider. Les fenêtres d'intervention du programme initial sont conservées. Michel intervient sur M1 à M3. Les interventions de Mously représentent **30 % du volume pédagogique total** : **25 % de cours de théorie et pratique** et **5 % de coaching**. Cette ventilation conserve les 5 % de coaching initiaux ; le nombre d’heures sera calculé lorsque le volume total sera connu. Le nombre de cartes ne permet pas de vérifier à lui seul cette répartition.
 
 ## Design des applications, puis vibe coding
 
@@ -52,7 +52,7 @@ Mously, Dany et l’équipe technique accompagnent une soutenance blanche avant 
 La rubrique « Cartes mentales » propose trois schémas :
 
 - [Vision du projet](docs/assets/carte-vision.svg) : besoin client, données et IA/ML, MVP, apprentissage, six mois et Demo Day.
-- [Du design à l’application](docs/assets/carte-application.svg) : comprendre et construire avant le vibe coding.
+- [Six mois vers le MVP](docs/assets/carte-application.svg) : design et application guidée, premier MVP en M3, puis essais clients, soutenance blanche et Demo Day.
 - [Équipe et rôles](docs/assets/carte-equipe.svg) : Mously au pilotage et les responsabilités des intervenants.
 
 Les boutons permettent de passer d'un schéma à l'autre. Les schémas s'ouvrent en grand et se téléchargent en SVG, un format vectoriel réutilisable dans une présentation. Sur petit écran, ils se parcourent horizontalement.

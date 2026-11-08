@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 820" role="img" aria-labelledby="title desc">
 <title id="title">Une équipe, des responsabilités complémentaires.</title>
-<desc id="desc">Mously : 30 % au total (25 % cours + 5 % coaching). Michel : 8 jours maximum.. Michel · M1 à M3: Théorie, culture et design, Fondements et compréhension, 8 jours maximum; Antoine · M2 à M4: Algorithmique et mathématiques, Python et manipulation des données, Architecture et application guidée; Yaaqoub · M3 à M5: API et architecture applicative, Intégration technique, Connexion des briques du MVP; Sion · M4 à M5: DevOps minimal, Déploiement du MVP, Conditions d’usage du pilote; Dany · M1, M3, M5, M6: Gestion de projet, Priorisation et suivi, Soutenance blanche · M5; Production · M6: Captation de la démonstration, Storytelling du parcours, Film étudiants, HETIC, partenaires; Cybersécurité : 5 % du volume total, intervenant et affectation des heures à préciser, risques, conception, code, déploiement et revue du MVP.</desc>
+<desc id="desc">Mously : 30 % au total (25 % cours + 5 % coaching). Michel intervient sur M1 à M3. Michel · M1 à M3: Théorie, culture et design, Fondements et compréhension, Applications et design; Antoine · M2 à M4: Algorithmique et mathématiques, Python et manipulation des données, Architecture et application guidée; Yaaqoub · M3 à M5: API et architecture applicative, Intégration technique, Connexion des briques du MVP; Sion · M4 à M5: DevOps minimal, Déploiement du MVP, Conditions d’usage du pilote; Dany · M1, M3, M5, M6: Gestion de projet, Priorisation et suivi, Soutenance blanche · M5; Production · M6: Captation de la démonstration, Storytelling du parcours, Film étudiants, HETIC, partenaires; Cybersécurité : 5 % du volume total, intervenant et affectation des heures à préciser, risques, conception, code, déploiement et revue du MVP.</desc>
 <rect width="1400" height="820" fill="#fbfafc"/>
 <style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif}.branch{fill:none;stroke-width:3;opacity:.6}.label{font-size:20px;font-weight:650;letter-spacing:-.4px}.copy{font-size:16px;fill:#7c6b88}.center-copy{font-size:18px;fill:#e5dcfa}</style>
 <text x="60" y="55" fill="#514160" font-size="28" font-weight="700" letter-spacing="-.7">Une équipe, des responsabilités complémentaires.</text>
-<text x="60" y="85" fill="#9682a4" font-size="15">Mously : 30 % au total (25 % cours + 5 % coaching). Michel : 8 jours maximum.</text>
+<text x="60" y="85" fill="#9682a4" font-size="15">Mously : 30 % au total (25 % cours + 5 % coaching). Michel intervient sur M1 à M3.</text>
 <path class="branch" stroke="#9878c9" d="M 570 445 C 480 445 510 218 415 218"/>
 <circle cx="415" cy="218" r="5" fill="#9878c9"/>
 <rect x="55" y="140" width="360" height="160" rx="14" fill="white" stroke="#9878c9" stroke-opacity=".35"/>
@@ -12,7 +12,7 @@
 <text class="label" x="93" y="181" fill="#9878c9">Michel · M1 à M3</text>
 <text class="copy" x="77" y="216">Théorie, culture et design</text>
 <text class="copy" x="77" y="242">Fondements et compréhension</text>
-<text class="copy" x="77" y="268">8 jours maximum</text>
+<text class="copy" x="77" y="268">Applications et design</text>
 <path class="branch" stroke="#4e927a" d="M 570 445 C 480 445 510 423 415 423"/>
 <circle cx="415" cy="423" r="5" fill="#4e927a"/>
 <rect x="55" y="345" width="360" height="160" rx="14" fill="white" stroke="#4e927a" stroke-opacity=".35"/>

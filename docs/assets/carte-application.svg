@@ -1,50 +1,70 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" role="img" aria-labelledby="title desc">
-<title id="title">Du design à une application que l’on sait créer et expliquer.</title>
-<desc id="desc">Le design de M1 et l’architecture puis l’application guidée de M2 précèdent le vibe coding de M3. M4 intègre et déploie, M5 prépare et corrige, M6 présente aux clients. Cybersécurité : 5 % sur le parcours.</desc>
-<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#b7a5d4"/></marker></defs>
-<rect width="1400" height="900" fill="#fbfafc"/>
-<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif}.copy{font-size:16px;fill:#7c6b88}.flow{stroke:#b7a5d4;stroke-width:3;fill:none;marker-end:url(#arrow)}</style>
-<text x="55" y="58" fill="#514160" font-size="30" font-weight="700">Concevoir avant de déléguer la génération du code.</text>
-<text x="55" y="92" fill="#9682a4" font-size="16">Objectif : chaque apprenant sait construire, expliquer et modifier une application.</text>
-<path class="flow" d="M435 250H495"/><path class="flow" d="M890 250H950"/><path class="flow" d="M1155 350V445"/><path class="flow" d="M965 560H905"/><path class="flow" d="M510 560H450"/>
-<rect x="55" y="150" width="380" height="200" rx="15" fill="white" stroke="#9878c9" stroke-opacity=".45"/>
-<text x="80" y="186" font-size="13" font-weight="650" fill="#9878c9">01 · M1</text>
-<text x="80" y="225" font-size="24" font-weight="650" fill="#9878c9">Théorie du design</text>
-<text class="copy" x="80" y="265">Besoins et parcours utilisateurs</text>
-<text class="copy" x="80" y="294">Maquettes et états de l’interface</text>
-<text class="copy" x="80" y="323">Données et risques du projet</text>
-<rect x="510" y="150" width="380" height="200" rx="15" fill="white" stroke="#5486b0" stroke-opacity=".45"/>
-<text x="535" y="186" font-size="13" font-weight="650" fill="#5486b0">02 · M2</text>
-<text x="535" y="225" font-size="24" font-weight="650" fill="#5486b0">Architecture des apps</text>
-<text class="copy" x="535" y="265">Client/serveur et HTTP</text>
-<text class="copy" x="535" y="294">Interface, API et stockage</text>
-<text class="copy" x="535" y="323">Échanges, droits et tests</text>
-<rect x="965" y="150" width="380" height="200" rx="15" fill="white" stroke="#4e927a" stroke-opacity=".45"/>
-<text x="990" y="186" font-size="13" font-weight="650" fill="#4e927a">03 · M2</text>
-<text x="990" y="225" font-size="24" font-weight="650" fill="#4e927a">Première application</text>
-<text class="copy" x="990" y="265">Un formulaire et un traitement</text>
-<text class="copy" x="990" y="294">Persistance et cas d’erreur</text>
-<text class="copy" x="990" y="323">Lire, modifier et expliquer le code</text>
-<rect x="965" y="460" width="380" height="200" rx="15" fill="white" stroke="#a78436" stroke-opacity=".45"/>
-<text x="990" y="496" font-size="13" font-weight="650" fill="#a78436">04 · M3</text>
-<text x="990" y="535" font-size="24" font-weight="650" fill="#a78436">Vibe coding</text>
-<text class="copy" x="990" y="575">Spécifier à partir du design</text>
-<text class="copy" x="990" y="604">Générer, relire et tester</text>
-<text class="copy" x="990" y="633">Corriger et comprendre les limites</text>
-<rect x="510" y="460" width="380" height="200" rx="15" fill="white" stroke="#8176ac" stroke-opacity=".45"/>
-<text x="535" y="496" font-size="13" font-weight="650" fill="#8176ac">05 · M4</text>
-<text x="535" y="535" font-size="24" font-weight="650" fill="#8176ac">Intégrer et déployer</text>
-<text class="copy" x="535" y="575">Relier application et IA/ML</text>
-<text class="copy" x="535" y="604">Configurer, protéger les secrets</text>
-<text class="copy" x="535" y="633">Faire essayer le MVP aux clients</text>
-<rect x="55" y="460" width="380" height="200" rx="15" fill="white" stroke="#ad6e91" stroke-opacity=".45"/>
-<text x="80" y="496" font-size="13" font-weight="650" fill="#ad6e91">06 · M5 → M6</text>
-<text x="80" y="535" font-size="24" font-weight="650" fill="#ad6e91">Expliquer et défendre</text>
-<text class="copy" x="80" y="575">Soutenance blanche et sécurité</text>
-<text class="copy" x="80" y="604">Petite modification commentée</text>
-<text class="copy" x="80" y="633">Corrections, Demo Day et clients</text>
-<rect x="55" y="725" width="1290" height="100" rx="14" fill="#edf6f7" stroke="#c4dce0"/>
-<text x="82" y="762" fill="#387e88" font-size="21" font-weight="650">Cybersécurité · 5 % du volume pédagogique total</text>
-<text x="82" y="796" fill="#6e9299" font-size="17">Risques → sécurité dans le design → entrées et accès → secrets et déploiement → revue du MVP</text>
-<text x="55" y="867" fill="#a291ad" font-size="12">HETIC · Mously : 30 % du volume total · Propositions de répartition à ajuster aux heures disponibles</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1020" role="img" aria-labelledby="title desc">
+<title id="title">HETIC : un premier MVP en M3, puis trois mois pour tester et améliorer.</title>
+<desc id="desc">Carte mentale du parcours sur six mois. M1 : Cadrer et concevoir, Comprendre un problème client, Parcours, maquettes et états, Premiers risques et données. Livrable : Besoin et design justifiés; M2 : Comprendre et construire, Architecture, API, données et Python, Première application guidée, Bases IA/ML et sécurité du design. Livrable : Application simple expliquée; M3 : Premier MVP utilisable, Un parcours essentiel qui fonctionne, Vibe coding : relire, tester et corriger, Premiers essais avec des clients. Livrable : Premier MVP utilisable; M4 : Tester en conditions réelles, Intégrer, déployer et faire essayer, Observer les usages et les résultats, Protéger les accès et les secrets. Livrable : Pilote et retours documentés; M5 : Soutenance blanche, Tests utilisateurs et revue de sécurité, Pitch, démonstration et questions, Modifier le code et expliquer ses choix. Livrable : Retours et corrections priorisées; M6 : Demo Day clients, Version corrigée et MVP consolidé, Présentation aux clients et retours, Captation vidéo du parcours. Livrable : Démonstration finale filmée. La théorie du design et une application guidée précèdent le vibe coding. Cybersécurité : 5 % du volume total ; Mously : 30 % d’intervention. Les volumes et acquis restent à préciser et à observer.</desc>
+<rect width="1400" height="1020" fill="#fbfafc"/>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif}.copy{font-size:16px;fill:#7c6b88}.branch{fill:none;stroke-width:3;opacity:.55}.proof{font-size:14px;font-weight:600}</style>
+<text x="50" y="54" fill="#514160" font-size="30" font-weight="700" letter-spacing="-.5">Six mois pour apprendre, construire et valider.</text>
+<text x="50" y="90" fill="#9682a4" font-size="17">Repère : premier MVP utilisable en M3, puis essais clients, corrections et consolidation jusqu’en M6.</text>
+<path class="branch" stroke="#9878c9" d="M 540 485 C 475 485 490 242 430 242"/>
+<rect x="50" y="140" width="380" height="205" rx="15" fill="white" stroke="#9878c9" stroke-width="1" stroke-opacity=".6"/>
+<text x="73" y="170" font-size="12" font-weight="700" letter-spacing="1.5" fill="#9878c9">M1</text>
+<text x="73" y="205" font-size="23" font-weight="650" letter-spacing="-.4" fill="#9878c9">Cadrer et concevoir</text>
+<text class="copy" x="73" y="238">Comprendre un problème client</text>
+<text class="copy" x="73" y="265">Parcours, maquettes et états</text>
+<text class="copy" x="73" y="292">Premiers risques et données</text>
+<path d="M73 310H407" stroke="#9878c9" stroke-opacity=".2"/>
+<text class="proof" x="73" y="330" fill="#9878c9">Besoin et design justifiés</text>
+<path class="branch" stroke="#5486b0" d="M 540 485 C 475 485 490 502 430 502"/>
+<rect x="50" y="400" width="380" height="205" rx="15" fill="white" stroke="#5486b0" stroke-width="1" stroke-opacity=".6"/>
+<text x="73" y="430" font-size="12" font-weight="700" letter-spacing="1.5" fill="#5486b0">M2</text>
+<text x="73" y="465" font-size="23" font-weight="650" letter-spacing="-.4" fill="#5486b0">Comprendre et construire</text>
+<text class="copy" x="73" y="498">Architecture, API, données et Python</text>
+<text class="copy" x="73" y="525">Première application guidée</text>
+<text class="copy" x="73" y="552">Bases IA/ML et sécurité du design</text>
+<path d="M73 570H407" stroke="#5486b0" stroke-opacity=".2"/>
+<text class="proof" x="73" y="590" fill="#5486b0">Application simple expliquée</text>
+<path class="branch" stroke="#328466" d="M 540 485 C 475 485 490 762 430 762"/>
+<rect x="50" y="660" width="380" height="205" rx="15" fill="white" stroke="#328466" stroke-width="2" stroke-opacity=".6"/>
+<text x="73" y="690" font-size="12" font-weight="700" letter-spacing="1.5" fill="#328466">M3</text>
+<text x="73" y="725" font-size="23" font-weight="650" letter-spacing="-.4" fill="#328466">Premier MVP utilisable</text>
+<text class="copy" x="73" y="758">Un parcours essentiel qui fonctionne</text>
+<text class="copy" x="73" y="785">Vibe coding : relire, tester et corriger</text>
+<text class="copy" x="73" y="812">Premiers essais avec des clients</text>
+<path d="M73 830H407" stroke="#328466" stroke-opacity=".2"/>
+<text class="proof" x="73" y="850" fill="#328466">Premier MVP utilisable</text>
+<path class="branch" stroke="#387e88" d="M 860 485 C 925 485 910 242 970 242"/>
+<rect x="970" y="140" width="380" height="205" rx="15" fill="white" stroke="#387e88" stroke-width="1" stroke-opacity=".6"/>
+<text x="993" y="170" font-size="12" font-weight="700" letter-spacing="1.5" fill="#387e88">M4</text>
+<text x="993" y="205" font-size="23" font-weight="650" letter-spacing="-.4" fill="#387e88">Tester en conditions réelles</text>
+<text class="copy" x="993" y="238">Intégrer, déployer et faire essayer</text>
+<text class="copy" x="993" y="265">Observer les usages et les résultats</text>
+<text class="copy" x="993" y="292">Protéger les accès et les secrets</text>
+<path d="M993 310H1327" stroke="#387e88" stroke-opacity=".2"/>
+<text class="proof" x="993" y="330" fill="#387e88">Pilote et retours documentés</text>
+<path class="branch" stroke="#a78436" d="M 860 485 C 925 485 910 502 970 502"/>
+<rect x="970" y="400" width="380" height="205" rx="15" fill="white" stroke="#a78436" stroke-width="1" stroke-opacity=".6"/>
+<text x="993" y="430" font-size="12" font-weight="700" letter-spacing="1.5" fill="#a78436">M5</text>
+<text x="993" y="465" font-size="23" font-weight="650" letter-spacing="-.4" fill="#a78436">Soutenance blanche</text>
+<text class="copy" x="993" y="498">Tests utilisateurs et revue de sécurité</text>
+<text class="copy" x="993" y="525">Pitch, démonstration et questions</text>
+<text class="copy" x="993" y="552">Modifier le code et expliquer ses choix</text>
+<path d="M993 570H1327" stroke="#a78436" stroke-opacity=".2"/>
+<text class="proof" x="993" y="590" fill="#a78436">Retours et corrections priorisées</text>
+<path class="branch" stroke="#ad6e91" d="M 860 485 C 925 485 910 762 970 762"/>
+<rect x="970" y="660" width="380" height="205" rx="15" fill="white" stroke="#ad6e91" stroke-width="1" stroke-opacity=".6"/>
+<text x="993" y="690" font-size="12" font-weight="700" letter-spacing="1.5" fill="#ad6e91">M6</text>
+<text x="993" y="725" font-size="23" font-weight="650" letter-spacing="-.4" fill="#ad6e91">Demo Day clients</text>
+<text class="copy" x="993" y="758">Version corrigée et MVP consolidé</text>
+<text class="copy" x="993" y="785">Présentation aux clients et retours</text>
+<text class="copy" x="993" y="812">Captation vidéo du parcours</text>
+<path d="M993 830H1327" stroke="#ad6e91" stroke-opacity=".2"/>
+<text class="proof" x="993" y="850" fill="#ad6e91">Démonstration finale filmée</text>
+<rect x="540" y="405" width="320" height="160" rx="22" fill="#6c58d5"/>
+<text x="700" y="446" text-anchor="middle" fill="white" font-size="30" font-weight="750">HETIC · 6 mois</text>
+<text x="700" y="486" text-anchor="middle" fill="white" font-size="23" font-weight="650">Premier MVP : M3</text>
+<text x="700" y="522" text-anchor="middle" fill="#e5dcfa" font-size="17">M4 à M6 : tester et améliorer</text>
+<rect x="50" y="902" width="1300" height="70" rx="12" fill="#edf6f7" stroke="#c4dce0"/>
+<text x="72" y="929" fill="#387e88" font-size="17" font-weight="650">Fil continu : apprentissage IA/ML, création d’application et retours clients · Cybersécurité : 5 % du volume total</text>
+<text x="72" y="954" fill="#6e9299" font-size="15">Design avant vibe coding · Mously : 30 % · Périmètre : un problème client précis et un parcours essentiel</text>
+<text x="50" y="1001" fill="#a291ad" font-size="12">Parcours proposé · À ajuster aux prérequis et aux heures disponibles · Les preuves restent à recueillir</text>
 </svg>

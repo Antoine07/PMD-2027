@@ -1,0 +1,16 @@
+name: PR email signal
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review]
+
+# This workflow handles untrusted PRs without checking out or executing their code.
+permissions: {}
+
+jobs:
+  signal:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - name: Signal a PR notification
+        run: echo 'PR notification requested.'

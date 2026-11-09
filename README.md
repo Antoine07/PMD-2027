@@ -157,6 +157,12 @@ Pour le plan de charge, vérifier les deux lectures, les intitulés, l’ouvertu
 
 Avant de valider une évolution du calendrier, parcourir les trois vues, tester les flèches, combiner les filtres, ouvrir une carte, utiliser le clavier, consulter sur mobile et vérifier l'aperçu d'impression. Tester aussi une période sans intervention et le retour au début du parcours.
 
+## Notifications de PR par e-mail
+
+Les GitHub Actions préparées dans `.github/workflows/` notifient l'ouverture ou la réouverture d'une PR, l'ajout de commits et son passage à prête pour revue. L'e-mail contient le lien, le dernier commit, les messages de commits et les fichiers modifiés avec leurs statistiques.
+
+Pour activer l'envoi, pousser les workflows sur la branche par défaut et renseigner les secrets SMTP ainsi que l'adresse destinataire dans GitHub. La [configuration et le test manuel](docs/notifications-pr.md) détaillent les paramètres et les limites. Les tests locaux se lancent avec `python3 -B -m unittest discover -s scripts -p 'test_pr_email.py'`, sans envoi d'e-mail.
+
 ## Versionner
 
 Les sources, la documentation, les prompts, les schémas et le skill font partie du dépôt. Le `.gitignore` exclut les secrets, dépendances, caches et fichiers générés.
@@ -174,7 +180,7 @@ git status --short
 git diff
 node scripts/render-supports.cjs
 node scripts/check-planning.cjs
-git add docs prompts README.md scripts AGENTS.md skills .gitignore
+git add .github docs prompts README.md scripts AGENTS.md skills .gitignore
 git commit -m "Mettre à jour le planning HETIC"
 ```
 

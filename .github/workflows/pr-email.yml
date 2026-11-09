@@ -1,0 +1,48 @@
+name: PR email
+
+on:
+  workflow_run:
+    workflows: [PR email signal]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: Numéro de la PR ouverte à notifier
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  notify:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.event == 'pull_request' &&
+       github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.repository.full_name == github.repository &&
+       github.event.workflow_run.run_attempt == 1)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      # Secrets are used only with code from the trusted default branch.
+      # Never replace this ref with a PR branch, SHA, or downloaded artifact.
+      - name: Read the notification script from the default branch
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          persist-credentials: false
+          sparse-checkout: .github/scripts
+
+      - name: Send the PR summary
+        run: python3 -B .github/scripts/notify_pr.py
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          MAIL_FROM: ${{ secrets.MAIL_FROM }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+          SMTP_PORT: ${{ vars.SMTP_PORT || '465' }}
+          SMTP_SECURITY: ${{ vars.SMTP_SECURITY || 'tls' }}

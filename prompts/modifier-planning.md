@@ -12,7 +12,7 @@ REMPLACER CE PARAGRAPHE par le changement précis : contenu, intervenant, mois, 
 2. `README.md` et `docs/pilotage-ia-mvp.md`.
 3. `docs/assets/planning-data.js`, puis les seuls fichiers concernés par la demande.
 
-Le produit est un planning documentaire HETIC, consultable sans authentification, avec une navigation par semaine, mois et six mois, des filtres, des cartes d'intervention et trois cartes mentales SVG. Le parcours vise la capacité à concevoir et créer une application, une progression IA/ML, 5 % de cybersécurité et un MVP confronté à de vrais clients.
+Le parcours commence le 1er janvier 2027 et se termine le 30 juin. Le produit est un planning documentaire HETIC, consultable sans authentification, avec une navigation par semaine, mois et six mois, des filtres, des cartes d'intervention et trois cartes mentales SVG. Le parcours vise la capacité à concevoir et créer une application, une progression IA/ML, 5 % de cybersécurité et un MVP confronté à de vrais clients.
 
 ## Réalisation attendue
 
@@ -29,11 +29,16 @@ Le produit est un planning documentaire HETIC, consultable sans authentification
 - Mettre à jour `docs/index.html`, `docs/parcours-hetic.md`, les schémas SVG et `README.md` seulement si les informations qu'ils affichent changent. Les rôles et pourcentages sont présents dans plusieurs supports : les garder cohérents.
 - Distinguer les propositions des faits. Ne pas transformer un objectif IA/ML en compétence acquise, ni un avis favorable en validation commerciale.
 - Conserver la navigation précédent/suivant, les vues, le défilement horizontal, les filtres combinés, le retour au début et l'ouverture des cartes au clavier.
+- Conserver le plan de charge (`workload.js`, `workload.css`, calcul `buildWorkload` dans `planning-model.js`) : les intervenants ou les activités en lignes, les six mois en colonnes et le détail des blocs au clic. Utiliser les données communes du planning. Distinguer les blocs uniques des participations de coanimation ; ne pas présenter les nombres de cartes comme des heures ou des taux d’occupation.
 - Pour un schéma mental, modifier le SVG vectoriel existant et garder les textes lisibles, le titre, la description accessible et le téléchargement fonctionnel.
 - Mettre à jour `docs/pilotage-ia-mvp.md` si la décision ou la prochaine étape change.
 
+- Préserver les bases individuelles IA, Data, applications, cyber, marketing et produit. La défense de proposition en M2 conditionne le périmètre du MVP ciblé en M3. Les rendez-vous clients sont portés par Brontis et Antoine.
+- Les objectifs et mesures de la timeline sont dans `learning`. Ne jamais présenter les répartitions proposées comme des acquis : les scores observés utilisent les critères évalués et une preuve, avec leur couverture.
+- Régénérer le SVG six mois, le CSV quotidien et la synthèse hebdomadaire avec `node scripts/render-supports.cjs` après une modification des contenus ou dates. Le relevé local du navigateur reste distinct des sources versionnées.
+
 ## Vérification et livraison
 
-Exécuter `node scripts/check-planning.cjs`. Pour une évolution de navigation, vérifier les vues semaine/mois/six mois, le passage décembre-janvier, février, les filtres sans résultat et la conservation du contexte lors d'un changement de vue. Utiliser le navigateur s'il est disponible ; signaler précisément les vérifications impossibles.
+Exécuter `node scripts/render-supports.cjs`, puis `node scripts/check-planning.cjs`. Pour une évolution de navigation, vérifier les vues semaine/mois/six mois, le passage décembre-janvier, février, les filtres sans résultat et la conservation du contexte lors d'un changement de vue. Utiliser le navigateur s'il est disponible ; signaler précisément les vérifications impossibles.
 
 Présenter les fichiers modifiés, le résultat et les contrôles effectués. Montrer `git diff --stat` si le dépôt est initialisé. Créer un commit seulement si la demande actuelle l'autorise ; ne pas pousser vers un dépôt distant sans instruction correspondante. Ne pas publier le site ni contacter les intervenants ou les clients à l'occasion d'une simple modification du planning.

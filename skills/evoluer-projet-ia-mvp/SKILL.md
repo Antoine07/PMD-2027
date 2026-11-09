@@ -61,6 +61,10 @@ Intégrer la cybersécurité à hauteur de 5 % du volume pédagogique total : ri
 
 Inclure design, architecture, capacité à modifier l'application et mesures de sécurité dans la soutenance blanche de M5, avec des corrections avant le Demo Day.
 
+Prévoir un diagnostic et des bases individuelles en IA, Data, applications, marketing et produit. Dès M1, expliciter segment, alternatives, valeur et positionnement ; en M2, faire défendre la proposition et revoir les bases avec des preuves. Le MVP de M3 est une cible conditionnelle : réduire le périmètre ou renforcer les acquis si nécessaire. Vérifier que chaque apprenant sait justifier ses propositions et répondre aux objections, au-delà de la seule démonstration de groupe.
+
+Pour les graphiques, distinguer répartitions pédagogiques proposées, critères observés et validation des jalons. Afficher la couverture des critères et une trace des observations. Ne pas convertir un nombre de blocs, un calendrier ou une proportion de théorie/pratique en pourcentage de connaissances acquises. Confier les rendez-vous clients à Brontis et Antoine dans ce parcours.
+
 Définir un segment accessible, un problème concret, sa fréquence, la solution actuelle et la personne qui décide ou paie. Réduire le MVP à un parcours complet qui apporte une valeur observable : entrée réelle, traitement, résultat utilisable et retour du client.
 
 Une prestation manuelle ou un prototype assisté peut vérifier le problème avant d'automatiser. Décrire honnêtement la part manuelle. Éviter l'infrastructure et les fonctions périphériques tant qu'elles ne sont pas nécessaires à l'usage ou à l'expérience en cours.

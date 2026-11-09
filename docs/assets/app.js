@@ -36,7 +36,7 @@
 
   function openIntervention(session) {
     selectMonth(session.month - 1);
-    const date = calendar.sessionDate(session, state.start);
+    const date = calendar.sessionDate(session, state.start, plan.calendar?.holidays);
     $('dialog-period').textContent = `HETIC · M${session.month} · ${categories[session.category]}${date ? ` · ${format(date)}${session.date ? ' · date renseignée' : ' · date proposée'}` : ' · date à préciser'}`;
     $('dialog-title').textContent = session.title;
     $('dialog-trainers').textContent = trainerNames(session);
@@ -51,7 +51,7 @@
 
   function interventionCard(session) {
     const person = plan.trainers.find(item => item.id === session.trainers[0]);
-    const date = calendar.sessionDate(session, state.start);
+    const date = calendar.sessionDate(session, state.start, plan.calendar?.holidays);
     const card = element('button', `intervention-card category-${session.category}`);
     card.type = 'button';
     card.style.setProperty('--event-color', person?.color || '#6c58d5');
@@ -136,8 +136,8 @@
     if (dated) {
       const days = calendar.daysInView(state.view, state.cursor);
       grid.style.setProperty('--column-count', String(days.length));
-      visible = sessions.filter(session => days.includes(calendar.sessionDate(session, state.start)));
-      days.forEach(date => grid.append(dayColumn(date, visible.filter(session => calendar.sessionDate(session, state.start) === date))));
+      visible = sessions.filter(session => days.includes(calendar.sessionDate(session, state.start, plan.calendar?.holidays)));
+      days.forEach(date => grid.append(dayColumn(date, visible.filter(session => calendar.sessionDate(session, state.start, plan.calendar?.holidays) === date))));
       $('period-label').textContent = state.view === 'week'
         ? `${format(days[0])} → ${format(days.at(-1), { day: 'numeric', month: 'short', year: 'numeric' })}`
         : format(state.cursor, { month: 'long', year: 'numeric' });
@@ -232,4 +232,12 @@
     links.forEach(link => observer.observe(document.querySelector(link.hash)));
   }
   render();
+  window.HETIC_WORKLOAD.init({ plan, model: calendar, categories, onSelect: openIntervention });
+  const openProgrammeMonth = index => {
+    state.index = index; state.view = 'month';
+    if (state.start) state.cursor = calendar.addMonths(state.start, index);
+    render(true); $('planning').scrollIntoView({ block: 'start' });
+  };
+  window.HETIC_LEARNING.init({ plan, model: calendar, onMonth: openProgrammeMonth });
+  window.HETIC_PROGRAMME.init({ plan, model: calendar, onMonth: openProgrammeMonth, onSelect: openIntervention });
 })();

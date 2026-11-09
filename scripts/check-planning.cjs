@@ -6,13 +6,32 @@ const vm = require('node:vm');
 const root = path.resolve(__dirname, '..');
 const read = file => fs.readFileSync(path.join(root, file), 'utf8');
 const context = vm.createContext({ window: {} });
-for (const file of ['planning-data.js', 'planning-model.js', 'app.js']) new vm.Script(read(`docs/assets/${file}`), { filename: file });
+for (const file of ['planning-data.js', 'planning-model.js', 'workload.js', 'learning.js', 'programme.js', 'app.js']) new vm.Script(read(`docs/assets/${file}`), { filename: file });
 for (const file of ['planning-data.js', 'planning-model.js']) vm.runInContext(read(`docs/assets/${file}`), context);
 const plan = context.window.HETIC_PLANNING;
 const model = context.window.HETIC_CALENDAR;
 
 assert.equal(plan.school, 'HETIC');
 assert.equal(plan.months.length, 6);
+assert.equal(plan.startDate, '2027-01-01');
+assert.equal(plan.learning.months.length, plan.months.length);
+assert.equal(plan.learning.mixStatus, 'proposal');
+assert.equal(plan.learning.domains.length, 6);
+assert.equal(plan.learning.criteria.length, 18);
+assert.equal(new Set(plan.learning.criteria.map(item => item.id)).size, plan.learning.criteria.length);
+for (const criterion of plan.learning.criteria) {
+  assert(plan.learning.domains.some(domain => domain.id === criterion.domain));
+  assert(['theory', 'practice', 'defense'].includes(criterion.kind));
+}
+assert.equal(plan.learning.domainMix.reduce((sum, item) => sum + item.share, 0), 100);
+assert.equal(new Set(plan.learning.domainMix.map(item => item.id)).size, 6);
+assert.equal(plan.learning.domainMix.find(item => item.id === 'cyber').share, 5);
+for (const [index, month] of plan.learning.months.entries()) {
+  assert.equal(month.month, index + 1);
+  assert.equal(month.theoryShare + month.practiceShare, 100);
+  assert(month.theoryShare >= 0 && month.theoryShare <= 100);
+  assert.equal(model.validateLearningMetrics(month.metrics, plan.learning.criteria).length, 0);
+}
 assert.equal(plan.allocation.mouslyTotal, plan.allocation.cours + plan.allocation.coaching, 'Répartition des interventions de Mously incohérente');
 assert(plan.allocation.mouslyTotal > 0 && plan.allocation.mouslyTotal <= 100);
 assert.equal(plan.allocation.cyber, 5, 'La cybersécurité doit représenter 5 % du volume total');
@@ -46,6 +65,8 @@ for (const session of plan.sessions) {
 const vibe = byId.get('m3-vibe-coding');
 assert(vibe && ['m1-design-apps', 'm2-architecture-apps', 'm2-app-guidee'].every(id => vibe.requires.includes(id)), 'Le design, l’architecture et une application guidée doivent précéder le vibe coding');
 assert(plan.sessions.some(session => session.category === 'cyber'), 'Contenus cyber absents');
+assert(vibe.requires.includes('m2-coaching'), 'La défense de proposition doit précéder le code assisté');
+for (const session of plan.sessions.filter(item => item.clientMeeting)) assert.deepEqual(Array.from(session.trainers).sort(), ['antoine', 'brontis'], 'Les rendez-vous clients relèvent de Brontis et Antoine');
 const rehearsal = plan.sessions.find(session => session.id === 'm5-soutenance-blanche');
 const corrections = plan.sessions.find(session => session.id === 'm5-corrections-soutenance');
 assert(rehearsal && corrections, 'Soutenance blanche ou reprise des retours absente');
@@ -73,6 +94,45 @@ assert.equal(model.projectMonthIndex('2027-02-14', '2027-01-15'), 0);
 assert.equal(model.projectMonthIndex('2027-02-15', '2027-01-15'), 1);
 assert.equal(model.projectMonthIndex('2027-08-01', '2027-01-15'), 5);
 assert.equal(model.projectMonthIndex('2026-12-01', '2027-01-15'), 0);
+const weeks = model.courseWeeks(plan.startDate, 6);
+assert.equal(weeks.length, 27);
+assert.equal(weeks[0].start, '2027-01-01'); assert.equal(weeks[0].end, '2027-01-03');
+assert.equal(weeks.at(-1).end, '2027-06-30');
+assert.equal(weeks.filter(week => week.partial).length, 2);
+for (let i = 1; i < weeks.length; i++) assert.equal(weeks[i].start, model.addDays(weeks[i - 1].end, 1));
+assert.equal(plan.weeklyGoals.length, weeks.length);
+assert.equal(model.sessionDate({ month: 1, dayOffset: 0, date: null }, plan.startDate, plan.calendar.holidays), '2027-01-04');
+const daily = model.courseDays(plan);
+assert.equal(daily.length, 181);
+assert.equal(daily.filter(day => day.active).length, 125);
+assert.equal(daily[0].holiday, 'Jour de l’an');
+assert.equal(daily.find(day => day.active).date, '2027-01-04');
+assert.equal(daily.flatMap(day => day.sessions).length, plan.sessions.length, 'Chaque bloc doit être retrouvé dans le planning quotidien');
+assert(daily.filter(day => !day.active).every(day => day.sessions.length === 0), 'Aucune intervention automatique sur week-end ou jour férié');
+for (const day of daily) if (day.active) assert(day.work && day.deliverable && day.defense);
+
+const cloneMetrics = () => JSON.parse(JSON.stringify(plan.learning.months[0].metrics));
+const unknown = cloneMetrics();
+let observed = model.learningSummary([unknown], plan.learning.criteria);
+assert.equal(observed.byKind.theory.percent, null);
+assert.equal(observed.byKind.practice.percent, null);
+assert.equal(observed.clientTrials, null);
+assert.equal(observed.beforeMvp.ready, false);
+const first = cloneMetrics(); first.assessments['ia-1'] = true; first.evidence = 'Explication individuelle documentée.';
+observed = model.learningSummary([first], plan.learning.criteria);
+assert.equal(observed.byKind.theory.percent, 100); assert.equal(observed.byKind.theory.assessed, 1); assert.equal(observed.byKind.theory.total, 6);
+assert.equal(observed.beforeMvp.ready, false, 'Un seul critère réussi ne suffit pas pour le socle');
+const later = cloneMetrics(); later.assessments['ia-1'] = false; later.assessments['apps-2'] = true; later.evidence = 'Nouvel exercice : difficulté IA et application démontrée.';
+observed = model.learningSummary([first, later], plan.learning.criteria);
+assert.equal(observed.byKind.theory.percent, 0, 'La dernière observation remplace la précédente');
+assert.equal(observed.byKind.practice.percent, 100);
+assert.equal(observed.byKind.defense.percent, null);
+assert(model.validateLearningMetrics({ ...first, evidence: '' }, plan.learning.criteria).length > 0);
+assert(model.validateLearningMetrics({ ...unknown, status: 'validated' }, plan.learning.criteria).length > 0);
+assert(model.validateLearningMetrics({ ...unknown, clientTrials: -1 }, plan.learning.criteria).length > 0);
+const ready = cloneMetrics(); ready.evidence = 'Revue des bases documentée.';
+for (const criterion of plan.learning.criteria) if (criterion.requiredBeforeMvp) ready.assessments[criterion.id] = true;
+assert.equal(model.learningSummary([ready], plan.learning.criteria).beforeMvp.ready, true);
 for (const start of ['2027-01-01', '2027-01-31', '2028-02-29', '2027-10-31']) {
   for (const session of plan.sessions) {
     const date = model.sessionDate(session, start);
@@ -92,6 +152,39 @@ assert(antoineCourses.length > 0);
 assert(antoineCourses.every(session => session.trainers.includes('antoine') && session.category === 'cours'));
 assert.equal(model.filterSessions(plan.sessions, { ...all, search: 'aucun-resultat-impossible' }, plan.trainers).length, 0);
 
+// Une coanimation crée deux participations, tout en restant un seul bloc distinct.
+const activities = { cours: 'Cours & ateliers', coaching: 'Coaching', projet: 'Projet & clients', cyber: 'Cybersécurité', demo: 'Demo Day' };
+const fixture = [
+  { id: 'commun', month: 1, category: 'cours', trainers: ['a', 'b'] },
+  { id: 'seul', month: 1, category: 'coaching', trainers: ['a'] },
+  { id: 'suivant', month: 2, category: 'cyber', trainers: ['b'] }
+];
+const fixtureTrainers = [{ id: 'a', name: 'A' }, { id: 'b', name: 'B' }];
+const combined = model.buildWorkload(fixture, fixtureTrainers, { categories: activities });
+assert.equal(combined.uniqueCount, 3);
+assert.equal(combined.participationCount, 4);
+assert.equal(combined.contributorCount, 2);
+assert.deepEqual(Array.from(combined.months, month => month.count), [2, 1, 0, 0, 0, 0]);
+assert.equal(combined.rows[0].cells[0].count, 2);
+assert.equal(combined.rows[1].cells[0].count, 1);
+assert.equal(combined.rows[0].cells[0].breakdown.length, 2);
+assert.equal(combined.rows[0].cells[0].intensity, 4);
+assert.equal(combined.rows[0].cells[2].intensity, 0);
+assert.deepEqual(Array.from(combined.peakMonths), [1]);
+const activityLoad = model.buildWorkload(fixture, fixtureTrainers, { axis: 'category', categories: activities });
+assert.equal(activityLoad.rows.reduce((sum, row) => sum + row.total, 0), 3);
+assert.equal(activityLoad.rows.find(row => row.id === 'cyber').cells[1].count, 1);
+const noLoad = model.buildWorkload([], fixtureTrainers, { categories: activities });
+assert.equal(noLoad.uniqueCount, 0);
+assert.equal(noLoad.maxCellCount, 0);
+assert.equal(noLoad.peakMonths.length, 0);
+assert(noLoad.rows.every(row => row.cells.every(cell => cell.intensity === 0)));
+assert.throws(() => model.buildWorkload([], [], { axis: 'inconnu' }));
+const workload = model.buildWorkload(plan.sessions, plan.trainers, { categories: activities });
+assert.equal(workload.months.reduce((sum, month) => sum + month.count, 0), plan.sessions.length);
+assert.equal(workload.rows.reduce((sum, row) => sum + row.total, 0), workload.participationCount);
+assert.equal(workload.rows.find(row => row.id === 'cyber').total, plan.sessions.filter(session => session.category === 'cyber').length);
+
 const html = read('docs/index.html');
 const htmlIds = Array.from(html.matchAll(/\bid="([^"]+)"/g), match => match[1]);
 assert.equal(new Set(htmlIds).size, htmlIds.length, 'Identifiants HTML dupliqués');
@@ -100,11 +193,13 @@ for (const match of html.matchAll(/<(?:a|script|link|img)\b[^>]*(?:href|src)="([
   if (target.startsWith('#')) assert(htmlIds.includes(target.slice(1)), `Ancre absente : ${target}`);
   else if (!/^[a-z]+:/i.test(target)) assert(fs.existsSync(path.join(root, 'docs', target)), `Ressource absente : ${target}`);
 }
-for (const match of read('docs/assets/app.js').matchAll(/\$\('([^']+)'\)/g)) assert(htmlIds.includes(match[1]), `Cible de l'interface absente : ${match[1]}`);
+for (const file of ['app.js', 'workload.js', 'learning.js', 'programme.js']) for (const match of read(`docs/assets/${file}`).matchAll(/\$\('([^']+)'\)/g)) assert(htmlIds.includes(match[1]), `Cible de l'interface absente : ${match[1]}`);
 assert(!html.includes('PMD'), 'Ancien nom présent dans la page');
 assert(!read('docs/parcours-hetic.md').includes('PMD'), 'Ancien nom présent dans le programme');
 for (const file of ['carte-vision.svg', 'carte-application.svg', 'carte-equipe.svg']) {
   const svg = read(`docs/assets/${file}`);
   assert(svg.includes('<title') && svg.includes('<desc') && svg.includes('HETIC'));
 }
-console.log(`OK — ${plan.months.length} mois, ${plan.trainers.length} intervenants ou collectifs, ${plan.sessions.length} blocs ; données, calendrier, filtres et ressources locales vérifiés.`);
+const generated = require('node:child_process').spawnSync(process.execPath, [path.join(__dirname, 'render-supports.cjs'), '--check'], { encoding: 'utf8' });
+assert.equal(generated.status, 0, generated.stderr || 'Supports générés à actualiser');
+console.log(`OK — ${daily.length} jours, ${weeks.length} semaines, ${plan.months.length} mois, ${plan.sessions.length} blocs et ${plan.learning.criteria.length} critères ; calendrier, charges, observations et supports vérifiés.`);

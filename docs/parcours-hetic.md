@@ -4,7 +4,9 @@
 
 **Objectif :** permettre aux apprenants de concevoir et créer une application, de progresser en IA/ML et en cybersécurité, puis de présenter un MVP fonctionnel à de vrais clients lors d’une démonstration finale filmée.
 
-**Pilotage : Mously. Durée : 6 mois.**
+**Pilotage : Mously. Du 1er janvier au 30 juin 2027.**
+
+[Planning quotidien CSV](planning-quotidien-2027.csv) · [Programme hebdomadaire](planning-semaines-2027.md) · [Autocritique et rééquilibrage](autocritique-parcours.md)
 
 ## Volumes pédagogiques
 
@@ -40,12 +42,12 @@ Ces thèmes sont à ventiler dans les 5 %, sans ajouter de volume horaire non d�
 
 | Mois | Étape | Intervenants principaux | Programme |
 | --- | --- | --- | --- |
-| M1 | Cadrage des projets | Mously · Dany · Michel | Besoins clients, gestion de projet, culture et fondements théoriques. Théorie du design d’applications : parcours, écrans, états et données. Introduction aux risques cyber. Théorie et pratique avec Mously. |
-| M2 | Fondations techniques | Mously · Antoine · Michel | Algorithmique, mathématiques et Python. Théorie des applications : client/serveur, HTTP, interfaces, API, données et tests. Première application guidée avant le vibe coding. Sécurité dès la conception. |
-| M3 | Développement du MVP | Mously · Antoine · Yaaqoub | Interfaces, architecture et API. Vibe coding après les bases de design et une première construction guidée : spécifier, générer, relire, tester et corriger. Validation des entrées et contrôle des accès. |
-| M4 | Intégration technique | Mously · Yaaqoub · Sion | API, intégration et DevOps minimal. Déploiement de l’application, configuration, secrets, accès et vérifications de sécurité avant le pilote. |
-| M5 | Finalisation, tests et soutenance blanche | Mously · Dany · Équipe technique | Tests utilisateurs, améliorations et revue de sécurité du MVP. Soutenance blanche : design, architecture, application, IA/ML, sécurité et retours clients. Corrections avant le Demo Day. |
-| M6 | Démonstration clients | Toute l’équipe · Société de production | Pitch, démonstration de l’application et du MVP IA/ML, explication du design, de l’architecture et des mesures de sécurité, retours clients et captation vidéo. |
+| M1 | Cadrage des projets | Mously · Dany · Michel | Diagnostic initial, besoins clients, bases produit et marketing, valeur et positionnement. Gestion de projet, théorie du design des applications et premiers risques cyber. |
+| M2 | Fondations techniques | Mously · Antoine · Michel · Dany | Bases IA, Data et applications : Python, statistiques, qualité des données, référence simple, architecture et application guidée. Défense de la proposition produit et marketing et revue des bases avant le MVP. |
+| M3 | Développement du MVP | Mously · Antoine · Yaaqoub | MVP ciblé après revue des bases. Interfaces, API et vibe coding encadré. Positionnement, message et hypothèse d’acquisition ; argumentation des choix techniques et produit. |
+| M4 | Intégration technique | Mously · Yaaqoub · Sion | API, intégration et DevOps minimal. Déploiement de l’application, configuration, secrets, accès et vérifications de sécurité avant le pilote. Analyse produit des retours et test des hypothèses de valeur et de message. |
+| M5 | Finalisation, tests et soutenance blanche | Mously · Dany · Équipe technique | Tests utilisateurs, améliorations et revue de sécurité du MVP. Soutenance blanche : design, architecture, application, IA/ML, sécurité et retours clients. Corrections avant le Demo Day. Défense du segment, de la valeur, du positionnement et des compromis avec des preuves. |
+| M6 | Démonstration clients | Brontis · Antoine · Équipe pédagogique · Production | Pitch, démonstration de l’application et du MVP IA/ML, explication du design, de l’architecture et des mesures de sécurité, retours clients et captation vidéo. Défense individuelle des propositions produit et marketing et des choix techniques. |
 
 Les interventions cyber proposées de M1 à M5 complètent les intervenants principaux ; leur affectation reste à confirmer.
 
@@ -69,7 +71,7 @@ Le [planning interactif](index.html#planning) propose les vues semaine, mois et 
 - **Applications :** Expliquer le rôle du frontend, du backend, de l’API et du stockage. Dessiner leurs échanges et construire une petite application guidée avec un formulaire, un traitement et une persistance de données.
 - **Cybersécurité :** Définir les droits selon les usages, limiter les données collectées et repérer les menaces dans les échanges de l’application. Prévoir les contrôles avant de coder.
 - **Validation client à réaliser :** Vérifier avec un client que les cas étudiés représentent son besoin et que les données sont disponibles et autorisées pour l’usage prévu.
-- **Jalon proposé :** Un schéma d’architecture, une petite application explicable, un notebook reproductible et des critères de test.
+- **Jalon proposé :** Une application guidée explicable, un notebook reproductible et une proposition défendue avec des preuves ; un bilan individuel des bases pour ajuster le passage au MVP.
 
 ### M3 — Développement du MVP
 
@@ -77,7 +79,7 @@ Le [planning interactif](index.html#planning) propose les vues semaine, mois et 
 - **Applications :** Construire une application de bout en bout. Utiliser le vibe coding à partir d’un design et d’une architecture explicités, puis relire, tester et modifier le code proposé. Réaliser une modification ciblée en expliquant son raisonnement.
 - **Cybersécurité :** Contrôler les entrées, les accès et les erreurs ; utiliser des requêtes paramétrées si le projet utilise une base de données. Vérifier le code généré sur les mêmes critères que le code écrit par l’équipe.
 - **Validation client à réaliser :** Faire essayer le premier parcours utilisable à des personnes du segment visé. Observer la tâche accomplie et consigner les obstacles.
-- **Jalon proposé :** Un MVP utilisable, son architecture documentée, des tests et un relevé des premières observations clients.
+- **Jalon proposé :** Un premier MVP visé si les bases et le périmètre le permettent, avec des choix justifiés, des tests et les premières observations clients.
 
 ### M4 — Intégration technique
 
@@ -111,11 +113,15 @@ Distinguer le travail produit par un assistant, le code reproduit par l’appren
 
 Évaluer séparément la valeur client : personnes rencontrées, cas d’essai, observations datées et améliorations décidées. Une démonstration ou un avis favorable ne suffit pas à établir une validation commerciale.
 
+## Défense de proposition — M2
+
+Mously, Dany et Michel accompagnent une défense individuelle des propositions : problème, segment, alternatives, valeur, données, design, faisabilité et critères d’acceptation. Les bases IA, Data et applications sont examinées avec les preuves. Selon les résultats, ajuster le périmètre ou renforcer les acquis avant le MVP ciblé de M3.
+
 ## Soutenance blanche des MVP — M5
 
 Mously, Dany et l’équipe technique accompagnent chaque équipe sur :
 
-- Le problème client et les choix de design, avec les parcours et maquettes.
+- Le problème client, le segment, les alternatives, la proposition de valeur et les choix de design.
 - L’architecture de l’application et une démonstration reproductible du MVP.
 - Les choix IA/ML, les résultats, les erreurs et les limites.
 - Les mesures de sécurité réellement mises en place et les vérifications réalisées.
@@ -129,17 +135,26 @@ Les retours du jury pédagogique alimentent un plan de corrections avant le Demo
 | Intervenant | Responsabilité | Période |
 | --- | --- | --- |
 | Mously | Pilotage, théorie et pratique : 25 % cours + 5 % coaching, soit 30 % au total | M1 à M6 |
-| Michel | Théorie, culture et fondements du design | M1 à M3 |
-| Antoine | Algorithmique, maths, Python, architecture, interfaces et première application guidée | M2 à M4 |
+| Michel | Fondements IA/Data, design et analyse critique des propositions | M1 à M3 |
+| Antoine | Bases Python/Data/apps et code assisté M2–M4 ; rendez-vous clients avec Brontis M1–M6 | M1 à M6 |
 | Yaaqoub | API et intégration | M3 à M5 |
 | Sion | DevOps minimal, déploiement | M4 à M5 |
-| Dany | Gestion de projet et préparation des soutenances | M1, M3, M5 et M6 |
+| Dany | Gestion de projet, découverte marché, message, argumentation et soutenances | M1 à M3, M5 et M6 |
+| Brontis | Rendez-vous et relation client avec Antoine | M1 à M6 |
 | Cybersécurité · à affecter | Contenu cyber : 5 % du volume total, affectation des heures à confirmer | M1 à M5 |
 | Société de production | Captation et storytelling | M6 |
 
 Les périodes sont des fenêtres d’intervention ; le planning met en avant les intervenants principaux. La ventilation fine reste à établir. L’affectation détaillée des nouveaux contenus reste une proposition de travail.
 
+## Mesures et graphiques d’apprentissage
+
+La timeline présente les étapes et les preuves attendues. Les ratios théorie/pratique mensuels et le camembert des six domaines sont des répartitions proposées, non des connaissances acquises. La proposition thématique est applications 30 %, Data 20 %, IA/ML 20 %, produit 15 %, marketing 10 % et cyber 5 %.
+
+Le relevé individuel utilise 18 critères en théorie, pratique et argumentation. Les scores correspondent aux critères démontrés parmi ceux évalués, avec la couverture affichée. La dernière observation connue est reprise jusqu’au mois choisi, y compris si elle montre une difficulté nouvelle. Aucune donnée ne signifie « à évaluer ». La preuve est requise pour documenter une observation.
+
 ## Cartes mentales
+
+Le [plan de charge visuel](index.html#plan-charge) présente aussi les intervenants et les activités en lignes, avec les six mois en colonnes. Ses nombres représentent des blocs pédagogiques et des participations, sans durée ni capacité horaire présumée. Chaque case donne accès au détail des interventions.
 
 - [Vision du projet](assets/carte-vision.svg) : clients, données, applications, apprentissage, cybersécurité et démonstration.
 - [Six mois vers le MVP](assets/carte-application.svg) : design et application guidée avant le vibe coding, premier MVP utilisable visé en M3, puis essais clients, soutenance blanche et Demo Day.
@@ -157,4 +172,4 @@ Les périodes sont des fenêtres d’intervention ; le planning met en avant les
 
 Relier la théorie à la pratique : comprendre, concevoir, construire, vérifier et expliquer. Une montée en compétences progressive, du coaching continu et six mois autour d’un véritable projet professionnel.
 
-Planning indicatif à ajuster selon les heures disponibles, les prérequis et le calendrier HETIC. Les clients, intervenants cyber, créneaux et modalités de captation restent à organiser ; aucun engagement externe n’est présumé.
+Planning indicatif à ajuster selon les heures disponibles, les prérequis et le calendrier HETIC. Les rendez-vous clients sont coordonnés par Brontis et Antoine ; leur confirmation, les intervenants cyber, les horaires et la captation restent à organiser ; aucun engagement externe n’est présumé.

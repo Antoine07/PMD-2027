@@ -29,23 +29,59 @@ Ouvrir ensuite `http://127.0.0.1:8000`. Arrêter le serveur avec `Ctrl+C`.
 
 ### Dates proposées et données versionnées
 
-La date de début n'a pas encore été communiquée : `startDate` vaut donc `null`. La vue initiale affiche M1 à M6. Le champ « Début du parcours » permet d'explorer un calendrier réel sans modifier les fichiers : cette saisie est temporaire et se réinitialise au rechargement.
+Le parcours est daté du **1er janvier au 30 juin 2027**. La première activité proposée est placée le **4 janvier**, après le jour férié et le week-end. Les champs de date du calendrier permettent une exploration temporaire ; le programme détaillé et les exports utilisent la date versionnée.
+Pour changer la date de début partagée, modifier `startDate` dans [planning-data.js](docs/assets/planning-data.js), au format `AAAA-MM-JJ`, puis versionner le fichier.
 
-Pour partager une date de début avec tous les lecteurs, modifier `startDate` dans [planning-data.js](docs/assets/planning-data.js), au format `AAAA-MM-JJ`, puis versionner le fichier.
+Les cartes ont un mois pédagogique et un décalage `dayOffset`. Lorsqu'une date de début est renseignée, le site calcule une **date proposée**, avec report au prochain jour positionnable si le calcul tombe un week-end ou un jour férié national. Une date individuelle peut être renseignée dans `date` ; elle prend alors la priorité sur le calcul. Aucun horaire ou volume n'est déduit de ces cartes. Elles représentent des blocs de contenu, pas un décompte des séances réelles.
 
-Les cartes ont un mois pédagogique et un décalage `dayOffset`. Lorsqu'une date de début est renseignée, le site calcule une **date proposée**, avec report au lundi si le jour calculé tombe un week-end. Une date individuelle peut être renseignée dans `date` ; elle prend alors la priorité sur le calcul. Aucun horaire ou volume n'est déduit de ces cartes. Elles représentent des blocs de contenu, pas un décompte des séances réelles.
+Les créneaux calculés, l'affectation détaillée des blocs et les compléments IA/ML restent des propositions à valider. Les fenêtres d’intervention sont rééquilibrées comme indiqué dans l’autocritique. Michel intervient sur M1 à M3 ; Antoine et Brontis assurent les rendez-vous clients sur M1 à M6. Les interventions de Mously représentent **30 % du volume pédagogique total** : **25 % de cours de théorie et pratique** et **5 % de coaching**. Cette ventilation conserve les 5 % de coaching initiaux ; le nombre d’heures sera calculé lorsque le volume total sera connu. Le nombre de cartes ne permet pas de vérifier à lui seul cette répartition.
 
-Les créneaux calculés, l'affectation détaillée des blocs et les compléments IA/ML restent des propositions à valider. Les fenêtres d'intervention du programme initial sont conservées. Michel intervient sur M1 à M3. Les interventions de Mously représentent **30 % du volume pédagogique total** : **25 % de cours de théorie et pratique** et **5 % de coaching**. Cette ventilation conserve les 5 % de coaching initiaux ; le nombre d’heures sera calculé lorsque le volume total sera connu. Le nombre de cartes ne permet pas de vérifier à lui seul cette répartition.
+## Programme jour par jour, semaine par semaine et par mois
+
+La première vue de la rubrique Planning est **Jour par jour**. Elle couvre les 181 dates du parcours, distingue les interventions proposées, le travail des apprenants et les jours sans activité imposée, et précise la preuve attendue et la question à défendre. Un filtre permet de choisir un mois. Le CSV est disponible dans [planning-quotidien-2027.csv](docs/planning-quotidien-2027.csv).
+
+Les vues **Par semaine**, **Par mois** et **6 mois** présentent le même programme avec des niveaux de détail différents. Le parcours touche 27 semaines calendaires, dont la première et la dernière sont partielles ; il ne s’agit pas de 27 semaines complètes de cours. Dans les synthèses mensuelles, une semaine est rattachée au mois de son premier jour inclus dans le parcours ; ses dates montrent les chevauchements éventuels. La [synthèse hebdomadaire](docs/planning-semaines-2027.md) reprend les objectifs et livrables.
+
+La trame propose un rythme du lundi au vendredi, hors jours fériés nationaux, sans inventer d’horaires ni de durées. Les vacances HETIC et les disponibilités restent à préciser. Les jours fériés utilisés proviennent de [Service Public, calendrier 2027](https://www.service-public.gouv.fr/particuliers/actualites/A19019). Une date individuelle explicitement renseignée reste prioritaire sur le report automatique.
+
+Les rendez-vous clients sont attribués à **Brontis et Antoine**. Le Demo Day et la captation sont proposés le **29 juin**, avec les retours le **30 juin** ; chaque équipe d’étudiants présente et défend son MVP.
+
+## Timeline, pourcentages et observations
+
+La rubrique **Timeline & apprentissage** rassemble une timeline cliquable de M1 à M6, des barres théorie/pratique, un camembert ou des barres par domaine et un relevé individuel sur six socles : IA/ML, Data, applications, cybersécurité, marketing et produit.
+
+Les ratios mensuels théorie/pratique proposés sont 70/30, 60/40, 35/65, 25/75, 20/80 et 10/90. La répartition thématique proposée est applications 30 %, Data 20 %, IA/ML 20 %, produit 15 %, marketing 10 % et cyber 5 %. Ces deux lectures décrivent des activités et des contenus ; elles ne mesurent pas les acquis et ne s’additionnent pas aux 30 % d’un intervenant. Le volume horaire étant inconnu, aucune moyenne horaire sur les six mois n’est déduite.
+
+Les **18 critères** portent sur théorie, pratique et argumentation. Le pourcentage observé correspond à « démontré / évalué », avec le nombre de critères évalués affiché à côté. Une valeur non observée reste « À évaluer ». Le graphique suit la dernière observation connue de chaque critère jusqu’au mois choisi ; une nouvelle difficulté peut remplacer une réussite antérieure. Le MVP de M3 est une cible conditionnée par une revue des bases, pas une validation automatique.
+
+Le formulaire dépliable permet de documenter les observations de chaque mois. Une trace ou preuve est requise pour les critères évalués et les jalons déclarés validés. Ce suivi individuel est conservé dans le navigateur ; l’export JSON permet de le conserver ou de le transmettre. Il n’existe pas de synchronisation entre appareils, d’agrégation de promotion ou de stockage serveur. Le fichier versionné conserve les objectifs et observations de référence ; les mesures locales ne le modifient pas.
+
+L’[autocritique et le rééquilibrage](docs/autocritique-parcours.md) expliquent les ajustements des modules et des responsabilités. Les bases et la défense de proposition arrivent en M1–M2 ; les 48 blocs existants sont conservés.
+
+## Plan de charge visuel
+
+La rubrique **Plan de charge**, accessible dans le menu, affiche une matrice sur les six mois. Les intervenants sont en lignes et les mois en colonnes. Les teintes montrent le nombre de blocs de chaque case ; les petites barres colorées distinguent cours, coaching, projet, cybersécurité et Demo Day. Les jalons M3, M5 et M6 restent visibles dans les en-têtes.
+
+- **Par intervenant** : repérer les périodes où chaque personne, rôle ou collectif participe aux blocs prévus.
+- **Par activité** : retrouver la répartition mensuelle des cours, du coaching, du travail projet, de la cybersécurité et des démonstrations.
+- **Afficher les intitulés** : rendre les titres des blocs visibles directement dans les cases.
+- **Clic sur une case** : consulter la liste des interventions ; cliquer sur un bloc ouvre son détail pédagogique. Le bouton « Fermer » ramène le focus à la case sélectionnée.
+
+Les indicateurs distinguent les **blocs distincts** des **participations** : un atelier coanimé par deux intervenants compte une fois dans le total du parcours et une fois sur chacune de leurs lignes. Les totaux mensuels comptent les blocs distincts. Cette vue couvre tout le parcours et reste indépendante des filtres du calendrier.
+
+Il s’agit d’une répartition schématique en blocs. Les durées, disponibilités et capacités n’étant pas renseignées, les couleurs ne représentent pas un taux d’occupation ni une surcharge horaire. Les repères Mously à 30 % et cybersécurité à 5 % sont rappelés sans calculer de volume mensuel.
+
+La matrice utilise les mêmes données que le planning. Modifier `planning-data.js` suffit à actualiser les visuels. Le calcul est dans `planning-model.js`, le rendu dans `workload.js` et les styles dans `workload.css`.
 
 ## Design des applications, puis vibe coding
 
-La théorie et la pratique guidée précèdent la génération assistée du code : **M1 design et maquettes → M2 architecture et première application guidée → M3 vibe coding → M4 déploiement → M5 soutenance blanche → M6 clients**. Chaque apprenant doit pouvoir expliquer l’application, diagnostiquer un problème et réaliser une petite modification. Les cartes `requires` expriment les prérequis ; les contrôles vérifient leur ordre dans le planning.
+La théorie et la pratique guidée précèdent la génération assistée du code : **M1 design et maquettes → M2 architecture et première application guidée → M3 MVP ciblé et vibe coding → M4 déploiement → M5 soutenance blanche → M6 clients**. Chaque apprenant doit pouvoir expliquer l’application, diagnostiquer un problème et réaliser une petite modification. Les cartes `requires` expriment les prérequis ; les contrôles vérifient leur ordre dans le planning.
 
 La cybersécurité couvre les risques et les données, la conception, le code, le déploiement et la revue du MVP dans les **5 % du volume total**. Cette part porte sur un contenu ; les 30 % de Mously portent sur un intervenant. L’affectation des heures cyber reste à établir et ces parts ne s’additionnent pas automatiquement. Le rôle « Cybersécurité · à affecter » ne désigne pas une personne confirmée.
 
-## Soutenance blanche des MVP — M5
+## Défense de proposition — M2, puis soutenance blanche — M5
 
-Mously, Dany et l’équipe technique accompagnent une soutenance blanche avant le Demo Day. Chaque équipe présente le problème client, démontre son MVP, explique le design, l’architecture, les choix IA/ML et les mesures de sécurité, puis réalise une modification ou un diagnostic ciblé en répondant aux questions. Les retours sont priorisés dans un plan de corrections et repris avant la démonstration finale de M6. Cette répétition pédagogique ne remplace pas les essais auprès de vrais clients.
+Une défense de proposition avec Mously, Dany et Michel est prévue en M2 pour revoir les bases et le périmètre. Mously, Dany et l’équipe technique accompagnent ensuite une soutenance blanche avant le Demo Day. Chaque équipe présente le problème client, démontre son MVP, explique le design, l’architecture, les choix IA/ML et les mesures de sécurité, puis réalise une modification ou un diagnostic ciblé en répondant aux questions. Les retours sont priorisés dans un plan de corrections et repris avant la démonstration finale de M6. Cette répétition pédagogique ne remplace pas les essais auprès de vrais clients.
 
 ## Cartes mentales
 
@@ -57,7 +93,7 @@ La rubrique « Cartes mentales » propose trois schémas :
 
 Les boutons permettent de passer d'un schéma à l'autre. Les schémas s'ouvrent en grand et se téléchargent en SVG, un format vectoriel réutilisable dans une présentation. Sur petit écran, ils se parcourent horizontalement.
 
-Le bouton **Imprimer / PDF** utilise l'impression du navigateur. Le planning reflète la vue et les filtres sélectionnés au moment de l'impression ; les trois cartes mentales sont incluses. Pour un document complet de référence, utiliser aussi [le programme texte](docs/parcours-hetic.md).
+Le bouton **Imprimer / PDF** utilise l'impression du navigateur. Le planning reflète la vue et les filtres sélectionnés au moment de l'impression ; les trois cartes mentales sont incluses. Le schéma six mois et les exports CSV/Markdown sont régénérés à partir des données par `scripts/render-supports.cjs`. Pour un document complet de référence, utiliser aussi [le programme texte](docs/parcours-hetic.md).
 
 ## Modifier le projet depuis la console
 
@@ -78,6 +114,9 @@ Cet exemple illustre la syntaxe d'une demande : il ne fixe pas la date réelle d
 | `docs/assets/planning-data.js` | Date de début, répartitions, objectifs IA/ML, applications et cyber, prérequis et interventions |
 | `docs/assets/planning-model.js` | Calcul des dates et périodes, recherche et filtres |
 | `docs/assets/app.js` | Navigation, rendu des cartes, fenêtres de détail et sélection des schémas |
+| `docs/assets/learning.js` et `learning.css` | Timeline, répartitions et observations individuelles |
+| `docs/assets/programme.js` et `programme.css` | Trames quotidienne, hebdomadaire, mensuelle et six mois |
+| `docs/assets/workload.js` et `workload.css` | Plan de charge interactif par intervenant ou activité |
 | `docs/index.html` | Structure de la page, repères, tableau des intervenants et livrables |
 | `docs/assets/styles.css` et `planning.css` | Mise en forme, mobile et impression |
 | `docs/assets/carte-vision.svg`, `carte-application.svg` et `carte-equipe.svg` | Schémas vectoriels |
@@ -92,10 +131,13 @@ Lorsqu'une modification change le programme, synchroniser les données, la page,
 Avec Node.js 18 ou une version ultérieure, sans installation de paquet :
 
 ```sh
+node scripts/render-supports.cjs
 node scripts/check-planning.cjs
 ```
 
-Ce contrôle vérifie la cohérence des données, les dates, les changements de semaine et de mois, l’ordre des prérequis avant le vibe coding, les filtres et les ressources locales. Il ne remplace pas une vérification dans le navigateur.
+Ce contrôle vérifie la cohérence des données, les dates, les changements de semaine et de mois, l’ordre des prérequis avant le vibe coding, les filtres, les agrégations du plan de charge et les ressources locales. Il ne remplace pas une vérification dans le navigateur.
+
+Pour le plan de charge, vérifier les deux lectures, les intitulés, l’ouverture et la fermeture d’une case, les coanimations, le défilement sur mobile et l’aperçu d’impression.
 
 Avant de valider une évolution du calendrier, parcourir les trois vues, tester les flèches, combiner les filtres, ouvrir une carte, utiliser le clavier, consulter sur mobile et vérifier l'aperçu d'impression. Tester aussi une période sans intervention et le retour au début du parcours.
 
@@ -114,6 +156,7 @@ Puis vérifier et enregistrer les fichiers :
 ```sh
 git status --short
 git diff
+node scripts/render-supports.cjs
 node scripts/check-planning.cjs
 git add docs prompts README.md scripts AGENTS.md skills .gitignore
 git commit -m "Mettre à jour le planning HETIC"

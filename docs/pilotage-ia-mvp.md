@@ -60,4 +60,10 @@ Les modules restent au nombre de 48 : davantage de bases et de produit/marketing
 
 La timeline, les barres théorie/pratique et les graphiques de domaines affichent des répartitions proposées. Les observations utilisent 18 critères individuels sur six socles et trois dimensions, avec preuve et couverture. Le relevé local du navigateur reste séparé du programme versionné ; aucun acquis n’est prérempli.
 
-Le programme détaillé propose des vues jour, semaine, mois et six mois. Brontis et Antoine coordonnent les rendez-vous clients. Le Demo Day et la captation sont proposés le 29 juin, avec retours le 30 juin.
+Le programme détaillé propose des vues jour, semaine, mois et six mois. Brontis et Antoine coordonnent les rendez-vous clients. Le Demo Day et la captation sont proposés le 29 juin, avec retours regroupés le 29 juin, le mercredi 30 étant réservé à la FOAD.
+
+## Rythme quotidien et soutien du mercredi
+
+Cours les lundi, mardi, jeudi et vendredi ; mercredi FOAD de soutien sur plateforme. Le calendrier courant prévoit 99 jours de cours, 26 mercredis FOAD et 104 activités-types à décliner, sans horaires inventés. Les cours calculés un mercredi sont reportés au prochain jour de cours. Les référents de soutien sont proposés par mois et les suivis FOAD ne représentent pas des journées de présence synchrone enseignante.
+
+Le plan de charge sépare jours de cours, rattachements de suivi et contenus. Les observations individuelles comprennent participation, réalisation plateforme, temps déclaré et objectifs de soutien validés ; elles restent inconnues tant qu’elles ne sont pas renseignées avec une trace. Les mois sans mesure sont exclus des dénominateurs observés plutôt que traités comme zéro. L’adresse de la plateforme et les modalités de synchronisation ne sont pas fournies : aucun service externe n’est présumé connecté.

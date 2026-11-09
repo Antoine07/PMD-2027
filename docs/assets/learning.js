@@ -21,7 +21,42 @@
       if (stored?.version === 1 && Array.isArray(stored.months) && stored.months.length === learning.months.length && stored.months.every(value => model.validateLearningMetrics(value, criteria).length === 0)) measures = stored.months;
     } catch { /* Le suivi fonctionne aussi sans stockage local. */ }
     const criterionInputs = new Map();
+    const deliveryFields = Object.keys(model.emptyDelivery());
     const percent = value => value === null ? 'À évaluer' : `${value} %`;
+
+    function renderSupport() {
+      const summary = model.deliverySummary(plan, measures.slice(0, state.month + 1));
+      $('support-planned-courses').textContent = String(summary.expected.courses);
+      $('support-planned-foad').textContent = String(summary.expected.foad);
+      $('support-planned-platform').textContent = String(summary.expected.activities);
+      const chart = $('support-rhythm-chart'); chart.replaceChildren();
+      summary.expected.months.forEach((month, index) => {
+        const row = make('button', 'support-month-row'); row.type = 'button'; row.dataset.learningMonth = String(index); row.setAttribute('aria-controls', 'learning-month-detail');
+        row.setAttribute('aria-label', `M${index + 1} : ${month.courses} jours de cours et ${month.foad} mercredis FOAD proposés.`);
+        const total = month.courses + month.foad;
+        const bar = make('span', 'support-month-bar'); const courses = make('span', 'support-course-bar', `${month.courses} cours`); const foad = make('span', 'support-foad-bar', `${month.foad} FOAD`);
+        courses.style.width = `${month.courses / total * 100}%`; foad.style.width = `${month.foad / total * 100}%`; bar.append(courses, foad);
+        row.append(make('strong', '', `M${index + 1}`), bar); row.addEventListener('click', () => {
+          selectMonth(index);
+          document.querySelector(`#support-rhythm-chart [data-learning-month="${index}"]`)?.focus({ preventScroll: true });
+        }); chart.append(row);
+      });
+      $('support-period').textContent = `Prévisions sur six mois ; observations connues jusqu’à M${state.month + 1}. Les ratios de jours ne sont pas des pourcentages horaires.`;
+      for (const [name, value] of [['course', summary.course], ['foad', summary.foad], ['platform', summary.platform], ['remediation', summary.support]]) {
+        $(`support-${name}-rate`).textContent = value.percent === null ? (value.reportedMonths && value.assigned === 0 ? 'Sans activité affectée' : 'À renseigner') : `${value.percent} %`;
+        $(`support-${name}-detail`).textContent = value.reportedMonths ? `${value.completed}/${value.assigned} sur ${value.reportedMonths} mois renseigné(s)` : 'Aucune observation renseignée';
+      }
+      $('support-platform-time').textContent = summary.minutes === null ? 'Temps déclaré sur plateforme : non renseigné.' : `Temps déclaré sur plateforme : ${Math.floor(summary.minutes / 60)} h ${summary.minutes % 60} min. La réalisation d’un parcours ne valide pas automatiquement une compétence.`;
+      if (plan.rhythm.platformUrl && /^https?:\/\//i.test(plan.rhythm.platformUrl)) {
+        $('support-platform-link').href = plan.rhythm.platformUrl;
+        $('support-platform-link').hidden = false;
+        $('support-platform-status').textContent = 'Plateforme de soutien renseignée ; les métriques restent déclarées dans ce relevé.';
+      } else {
+        $('support-platform-link').hidden = true;
+        $('support-platform-status').textContent = 'L’adresse de la plateforme de soutien reste à renseigner ; aucune synchronisation automatique n’est active.';
+      }
+      markMonth();
+    }
 
     function markMonth() {
       document.querySelectorAll('[data-learning-month]').forEach(button => {
@@ -130,7 +165,10 @@
       $('learning-status').value = metrics.status;
       $('learning-client-input').value = metrics.clientTrials ?? '';
       $('learning-evidence').value = metrics.evidence;
+      const delivery = { ...model.emptyDelivery(), ...metrics.delivery };
+      deliveryFields.forEach(field => { $(`learning-delivery-${field}`).value = delivery[field] ?? ''; });
       criteria.forEach(criterion => { const value = metrics.assessments[criterion.id]; criterionInputs.get(criterion.id).value = value === null ? '' : String(value); });
+      renderSupport();
     }
     function createForm() {
       const groups = $('learning-criteria');
@@ -151,9 +189,10 @@
         status: $('learning-status').value,
         assessments: Object.fromEntries(criteria.map(criterion => { const value = criterionInputs.get(criterion.id).value; return [criterion.id, value === '' ? null : value === 'true']; })),
         clientTrials: $('learning-client-input').value === '' ? null : Number($('learning-client-input').value),
-        evidence: $('learning-evidence').value.trim()
+        evidence: $('learning-evidence').value.trim(),
+        delivery: Object.fromEntries(deliveryFields.map(field => { const value = $(`learning-delivery-${field}`).value; return [field, value === '' ? null : Number(value)]; }))
       };
-      const errors = model.validateLearningMetrics(metrics, criteria);
+      const errors = model.validateLearningMetrics(metrics, criteria, model.deliveryPlan(plan).months[state.month]);
       if (errors.length) { $('learning-feedback').textContent = errors.join(' '); return; }
       measures[state.month] = metrics;
       let persisted = true;

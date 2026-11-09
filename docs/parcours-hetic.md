@@ -16,6 +16,16 @@
 
 La part de Mously décrit une charge d’intervention ; la cybersécurité décrit un contenu pédagogique. L’affectation des heures cyber reste à préciser : ces pourcentages ne s’additionnent pas automatiquement. Le rôle « Cybersécurité · à affecter » ne désigne pas un intervenant confirmé. Les heures seront établies lorsque le volume total sera connu ; le nombre de cartes ne mesure pas ces pourcentages.
 
+## Rythme des cours et soutien FOAD
+
+- **Lundi, mardi, jeudi et vendredi : cours et ateliers encadrés.**
+- **Mercredi : FOAD de soutien sur plateforme**, avec cours de soutien, rappels, exercices corrigés, QCM/rappel actif et dépôt d’une preuve.
+- Le référent assure un suivi proposé à ventiler en temps de retour ; il n’est pas présumé présent en synchrone toute la journée de FOAD.
+
+Le calendrier actuel comporte 99 jours de cours et 26 mercredis FOAD, hors week-ends et jours fériés nationaux. Quatre activités-types sont proposées par mercredi, soit 104 à décliner selon les besoins. Les vacances HETIC, horaires, durées et disponibilités restent à confirmer. La plateforme est à relier ; les mesures de suivi sont déclarées, sans connexion automatique.
+
+Le [plan de charge](plan-charge-2027.md) sépare cours et suivi FOAD. Les métriques distinguent prévisions, présence ou parcours suivis, réalisation des activités, temps déclaré, objectifs de soutien validés et acquis observés. Aucune compétence n’est validée par le seul fait de suivre un cours de soutien.
+
 ## Design des applications avant le vibe coding
 
 1. **M1 — Théorie du design :** utilisateurs, besoins, parcours, hiérarchie des écrans, maquettes, états de chargement, d’erreur et de réussite, données et premiers risques.
@@ -163,7 +173,7 @@ Le [plan de charge visuel](index.html#plan-charge) présente aussi les intervena
 ## Livrable final — Demo Day
 
 - Une application MVP fonctionnelle par équipe, démontrable sur un cas concret.
-- Une démonstration devant des clients invités.
+- Une démonstration devant des clients invités, coordonnée par Brontis et Antoine le 29 juin proposé. Le mercredi 30 reste en FOAD de bilan et soutien.
 - Une présentation du design, de l’architecture et des choix IA/ML et de sécurité, avec leurs limites.
 - Des retours clients documentés pour évaluer la pertinence du projet.
 - Un film pour valoriser les étudiants, HETIC et les partenaires.

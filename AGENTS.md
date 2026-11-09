@@ -6,6 +6,8 @@ Les apprenants doivent savoir concevoir et créer une application. Placer la th�
 
 Le parcours va du 1er janvier au 30 juin 2027. Brontis et Antoine coordonnent les rendez-vous clients. Renforcer les bases IA, Data, applications, marketing et produit ; prévoir une défense de proposition en M2 et conditionner le MVP ciblé de M3 à une revue des bases. Les pourcentages proposés des graphiques ne sont pas des acquis observés : documenter individuellement théorie, pratique et argumentation avec une preuve et une couverture d’évaluation.
 
+Rythme retenu : cours les lundi, mardi, jeudi et vendredi ; mercredi FOAD de soutien sur plateforme. Réserver le mercredi à la FOAD, en distinguant les journées apprenants du suivi des référents, sans inventer de durée de présence. Les métriques de participation, de plateforme, de temps déclaré et d’objectifs de soutien restent inconnues tant qu’elles ne sont pas renseignées avec une trace ; elles ne valident pas automatiquement un acquis.
+
 ## Skill du projet
 
 Pour cadrer le produit, prioriser une évolution, conduire une expérimentation IA/ML ou préparer et analyser un pilote client, lire et appliquer [evoluer-projet-ia-mvp](skills/evoluer-projet-ia-mvp/SKILL.md).

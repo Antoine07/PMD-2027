@@ -105,6 +105,38 @@ assert.equal(model.sessionDate({ month: 1, dayOffset: 0, date: null }, plan.star
 const daily = model.courseDays(plan);
 assert.equal(daily.length, 181);
 assert.equal(daily.filter(day => day.active).length, 125);
+assert.deepEqual(Array.from(plan.rhythm.courseWeekdays), [1, 2, 4, 5]);
+assert.equal(plan.rhythm.foadWeekday, 3);
+const deliveryExpected = model.deliveryPlan(plan);
+assert.equal(deliveryExpected.courses, 99);
+assert.equal(deliveryExpected.foad, 26);
+assert.equal(deliveryExpected.activities, 104);
+for (const day of daily) {
+  if (!day.active) continue;
+  if (model.parse(day.date).getUTCDay() === 3) {
+    assert.equal(day.modality, 'foad'); assert.equal(day.sessions.length, 0);
+    assert.equal(day.platformActivities.length, 4);
+    assert(day.supportTrainers.length > 0); assert.equal(day.courseTrainers.length, 0);
+  } else {
+    assert.equal(day.modality, 'cours'); assert(day.courseTrainers.length > 0);
+    assert.equal(day.supportTrainers.length, 0);
+  }
+  for (const trainer of [...day.courseTrainers, ...day.supportTrainers]) assert(trainers.has(trainer));
+}
+assert.equal(model.sessionDate({ month: 1, dayOffset: 12, date: null }, plan.startDate, plan.calendar.holidays, plan.rhythm), '2027-01-14');
+const schedule = model.scheduleSessions(plan);
+assert.equal(new Set(schedule.map(item => item.id)).size, schedule.length);
+for (const day of daily.filter(day => day.active)) {
+  const elements = schedule.filter(session => model.sessionDate(session, plan.startDate, plan.calendar.holidays, plan.rhythm) === day.date);
+  assert(elements.length > 0, `Journée active sans cours ou FOAD : ${day.date}`);
+  if (day.modality === 'foad') assert(elements.every(item => item.category === 'foad'));
+}
+const rhythmLoad = model.buildDeliveryWorkload(plan, 'rhythm');
+assert.equal(rhythmLoad.rows.find(row => row.id === 'cours').total, 99);
+assert.equal(rhythmLoad.rows.find(row => row.id === 'foad').total, 26);
+const staffLoad = model.buildDeliveryWorkload(plan, 'staff');
+assert.equal(staffLoad.uniqueCount, 125);
+assert.equal(staffLoad.rows.reduce((sum, row) => sum + row.total, 0), staffLoad.participationCount);
 assert.equal(daily[0].holiday, 'Jour de l’an');
 assert.equal(daily.find(day => day.active).date, '2027-01-04');
 assert.equal(daily.flatMap(day => day.sessions).length, plan.sessions.length, 'Chaque bloc doit être retrouvé dans le planning quotidien');
@@ -133,6 +165,33 @@ assert(model.validateLearningMetrics({ ...unknown, clientTrials: -1 }, plan.lear
 const ready = cloneMetrics(); ready.evidence = 'Revue des bases documentée.';
 for (const criterion of plan.learning.criteria) if (criterion.requiredBeforeMvp) ready.assessments[criterion.id] = true;
 assert.equal(model.learningSummary([ready], plan.learning.criteria).beforeMvp.ready, true);
+const january = cloneMetrics();
+january.delivery = { courseAttended: 12, foadCompleted: 3, platformAssigned: 8, platformCompleted: 6, platformMinutes: 90, supportObjectives: 4, supportValidated: 2 };
+january.evidence = 'Relevé individuel de participation et dépôts plateforme.';
+assert.equal(model.validateLearningMetrics(january, plan.learning.criteria, deliveryExpected.months[0]).length, 0);
+const supportSummary = model.deliverySummary(plan, [january, cloneMetrics()]);
+assert.equal(supportSummary.course.percent, 75);
+assert.equal(supportSummary.course.assigned, 16, 'Un mois sans mesure ne doit pas être traité comme une absence');
+assert.equal(supportSummary.foad.percent, 75);
+assert.equal(supportSummary.platform.percent, 75);
+assert.equal(supportSummary.support.percent, 50);
+assert.equal(supportSummary.minutes, 90);
+assert.equal(model.learningSummary([january], plan.learning.criteria).byKind.practice.percent, null, 'Participer au soutien ne valide pas automatiquement un acquis');
+const missing = model.deliverySummary(plan, [cloneMetrics()]);
+assert.equal(missing.course.percent, null);
+assert.equal(missing.platform.percent, null);
+assert.equal(missing.minutes, null);
+const legacy = cloneMetrics(); delete legacy.delivery;
+assert.equal(model.validateLearningMetrics(legacy, plan.learning.criteria).length, 0, 'Les anciennes observations restent lisibles');
+assert.equal(model.deliverySummary(plan, [legacy]).platform.percent, null);
+const unassigned = cloneMetrics(); unassigned.evidence = 'Aucune activité plateforme affectée sur ce mois.';
+unassigned.delivery.platformAssigned = 0; unassigned.delivery.platformCompleted = 0;
+assert.equal(model.deliverySummary(plan, [unassigned]).platform.percent, null, 'Zéro activité affectée ne définit pas un taux de réalisation');
+const absent = cloneMetrics(); absent.delivery.courseAttended = 0; absent.evidence = 'Aucun cours suivi sur la période renseignée.';
+assert.equal(model.deliverySummary(plan, [absent]).course.percent, 0);
+assert(model.validateLearningMetrics({ ...january, delivery: { ...january.delivery, foadCompleted: 5 } }, plan.learning.criteria, deliveryExpected.months[0]).length > 0);
+assert(model.validateLearningMetrics({ ...january, delivery: { ...january.delivery, platformCompleted: 9 } }, plan.learning.criteria).length > 0);
+assert(model.validateLearningMetrics({ ...january, delivery: { ...january.delivery, supportValidated: 5 } }, plan.learning.criteria).length > 0);
 for (const start of ['2027-01-01', '2027-01-31', '2028-02-29', '2027-10-31']) {
   for (const session of plan.sessions) {
     const date = model.sessionDate(session, start);

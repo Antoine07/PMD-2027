@@ -10,6 +10,7 @@ const xml = value => String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', 
 const format = value => model.parse(value).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', timeZone: 'UTC' });
 const weeks = model.courseWeeks(plan.startDate, plan.months.length);
 const days = model.courseDays(plan);
+const delivery = model.deliveryPlan(plan);
 const names = ids => ids.map(id => plan.trainers.find(person => person.id === id)?.name || id).join(' · ');
 const wrap = (value, max) => {
   const lines = []; let line = '';
@@ -54,18 +55,28 @@ function svg() {
   });
   out.push('<circle cx="1080" cy="715" r="72" fill="white"/><text x="1080" y="716" text-anchor="middle" font-size="29" font-weight="650" fill="#8f6fa3">100 %</text><text x="1080" y="743" text-anchor="middle" font-size="12" class="muted">à valider</text><text x="930" y="876" font-size="13" class="muted">Répartition thématique du volume total, sans double compte.</text>');
   out.push('<rect x="45" y="935" width="1510" height="130" rx="12" fill="#f2edf9" stroke="#e1d5ee"/><text x="70" y="971" fill="#8b699f" font-size="18" font-weight="650">L’apprentissage doit être démontré individuellement.</text><text x="70" y="1001" class="copy">18 critères : théorie, pratique et argumentation sur six socles. Diagnostic initial, défense en M2, soutenance blanche en M5.</text><text x="70" y="1032" class="copy">Aucun score acquis inventé. Les graphiques observés de l’application utilisent les preuves renseignées. Relation client : Brontis et Antoine.</text>',
-    '<text x="45" y="1097" font-size="12" class="muted">Mously : 30 % (25 % cours + 5 % coaching) · Cyber : 5 % du contenu · Volumes horaires et vacances HETIC à préciser</text></svg>');
+    `<text x="45" y="1097" font-size="12" class="muted">${delivery.courses} jours de cours · ${delivery.foad} mercredis FOAD soutien · ${delivery.activities} activités plateforme · Mously : 30 % (25 % cours + 5 % coaching) · Cyber : 5 % · Durées à préciser</text></svg>`);
   return out.join('\n') + '\n';
 }
 const csvCell = value => '"' + String(value ?? '').replace(/"/g, '""') + '"';
-const csv = '\uFEFF' + [['Date', 'Semaine', 'Mois', 'Statut', 'Étape', 'Modules proposés', 'Responsables', 'Travail proposé', 'Preuve attendue', 'Question à défendre'], ...days.map(day => [day.date, `S${day.week}`, `M${day.month}`, day.holiday || (day.active ? 'Trame proposée' : 'Week-end'), day.focus, day.sessions.map(item => item.title).join(' | '), names([...new Set(day.sessions.flatMap(item => item.trainers))]), day.work, day.deliverable, day.defense])].map(row => row.map(csvCell).join(';')).join('\r\n') + '\r\n';
-let weekly = '# HETIC — Planning semaine par semaine\n\nDu **1er janvier au 30 juin 2027** : 27 semaines calendaires touchées, dont la première et la dernière sont partielles. Trame proposée sans horaires, hors jours fériés nationaux pour le positionnement automatique ; vacances HETIC à préciser.\n\n[Planning quotidien CSV](planning-quotidien-2027.csv) · [Application](index.html#planning)\n\n| Semaine | Dates | Objectif | Livrable | Proposition à défendre |\n| --- | --- | --- | --- | --- |\n';
+const csv = '\uFEFF' + [['Date', 'Semaine', 'Mois', 'Statut', 'Modalité', 'Étape', 'Modules proposés', 'Intervenants cours', 'Référents suivi FOAD', 'Activités plateforme', 'Travail proposé', 'Preuve attendue', 'Question à défendre'], ...days.map(day => [day.date, `S${day.week}`, `M${day.month}`, day.holiday || (day.active ? 'Trame proposée' : 'Week-end'), day.modality === 'foad' ? 'FOAD de soutien' : day.modality === 'cours' ? 'Cours encadrés' : 'Sans activité imposée', day.focus, day.sessions.map(item => item.title).join(' | '), names(day.courseTrainers), names(day.supportTrainers), day.platformActivities.join(' | '), day.work, day.deliverable, day.defense])].map(row => row.map(csvCell).join(';')).join('\r\n') + '\r\n';
+let weekly = '# HETIC — Planning semaine par semaine\n\nDu **1er janvier au 30 juin 2027** : 27 semaines calendaires touchées, dont la première et la dernière sont partielles. Cours les lundi, mardi, jeudi et vendredi ; mercredi FOAD de soutien sur plateforme. Trame proposée sans horaires, hors jours fériés nationaux ; vacances HETIC à préciser.\n\n[Planning quotidien CSV](planning-quotidien-2027.csv) · [Application](index.html#planning)\n\n| Semaine | Dates | Objectif | Livrable | Proposition à défendre | Mercredi FOAD / référent |\n| --- | --- | --- | --- | --- | --- |\n';
 for (const week of weeks) {
   const goal = plan.weeklyGoals.find(item => item.number === week.number);
-  weekly += `| S${week.number}${week.partial ? ' · partielle' : ''} | ${format(week.start)} → ${format(week.end)} | ${goal.title} | ${goal.deliverable} | ${goal.defense} |\n`;
+  const foad = days.filter(day => day.week === week.number && day.modality === 'foad').map(day => `${format(day.date)} · ${names(day.supportTrainers)}`).join('; ') || 'Pas de mercredi actif sur la période';
+  weekly += `| S${week.number}${week.partial ? ' · partielle' : ''} | ${format(week.start)} → ${format(week.end)} | ${goal.title} | ${goal.deliverable} | ${goal.defense} | ${foad} |\n`;
 }
+weekly += `\nRythme prévu : **${delivery.courses} jours de cours et ${delivery.foad} mercredis FOAD**, avec ${delivery.activities} activités plateforme proposées. Le suivi FOAD n’est pas une journée de présence synchrone de l’enseignant.\n`;
 weekly += '\nRendez-vous clients : **Brontis et Antoine**. Le premier MVP de M3 est conditionné par la revue des bases et un périmètre réalisable. Les apprenants doivent défendre leurs propositions produit et marketing et expliquer leur réalisation technique.\n\nSource des jours fériés : [Service Public, calendrier 2027](https://www.service-public.gouv.fr/particuliers/actualites/A19019).\n';
-const outputs = { 'docs/assets/carte-application.svg': svg(), 'docs/planning-quotidien-2027.csv': csv, 'docs/planning-semaines-2027.md': weekly };
+const staff = model.buildDeliveryWorkload(plan, 'staff');
+const cellCounts = cell => ({ courses: cell.breakdown.find(item => item.id === 'cours')?.count || 0, foad: cell.breakdown.find(item => item.id === 'foad')?.count || 0 });
+let staffMarkdown = '# HETIC — Plan de charge proposé, cours et soutien FOAD\n\nDu 1er janvier au 30 juin 2027. **C = jour de mobilisation proposé en cours ; F = rattachement à un suivi de mercredi FOAD.** Un F ne représente pas une journée de présence synchrone. Durées, disponibilités et vacances HETIC à confirmer.\n\n| Intervenant / rôle | M1 C/F | M2 C/F | M3 C/F | M4 C/F | M5 C/F | M6 C/F | Total C/F |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n';
+for (const row of staff.rows) {
+  const counts = row.cells.map(cellCounts);
+  staffMarkdown += '| ' + row.label + ' | ' + counts.map(item => `${item.courses}/${item.foad}`).join(' | ') + ' | ' + counts.reduce((sum, item) => sum + item.courses, 0) + '/' + counts.reduce((sum, item) => sum + item.foad, 0) + ' |\n';
+}
+staffMarkdown += `\nPour les apprenants : **${delivery.courses} jours de cours et ${delivery.foad} mercredis FOAD**, soit ${delivery.courses + delivery.foad} jours d’apprentissage proposés. La plateforme prévoit ${delivery.activities} activités-types à décliner, quatre par mercredi. Les coanimations expliquent que les mobilisations des intervenants dépassent le nombre de journées apprenants.\n\nLes 30 % de Mously et les 5 % du contenu cyber restent des repères à vérifier en heures. Aucun taux d’occupation ou volume ETP n’est déduit des nombres de jours. Les rendez-vous clients sont coordonnés par Brontis et Antoine.\n`;
+const outputs = { 'docs/assets/carte-application.svg': svg(), 'docs/planning-quotidien-2027.csv': csv, 'docs/planning-semaines-2027.md': weekly, 'docs/plan-charge-2027.md': staffMarkdown };
 let stale = false;
 for (const [file, content] of Object.entries(outputs)) {
   const target = path.join(root, file);

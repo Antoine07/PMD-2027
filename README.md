@@ -42,9 +42,23 @@ La première vue de la rubrique Planning est **Jour par jour**. Elle couvre les 
 
 Les vues **Par semaine**, **Par mois** et **6 mois** présentent le même programme avec des niveaux de détail différents. Le parcours touche 27 semaines calendaires, dont la première et la dernière sont partielles ; il ne s’agit pas de 27 semaines complètes de cours. Dans les synthèses mensuelles, une semaine est rattachée au mois de son premier jour inclus dans le parcours ; ses dates montrent les chevauchements éventuels. La [synthèse hebdomadaire](docs/planning-semaines-2027.md) reprend les objectifs et livrables.
 
-La trame propose un rythme du lundi au vendredi, hors jours fériés nationaux, sans inventer d’horaires ni de durées. Les vacances HETIC et les disponibilités restent à préciser. Les jours fériés utilisés proviennent de [Service Public, calendrier 2027](https://www.service-public.gouv.fr/particuliers/actualites/A19019). Une date individuelle explicitement renseignée reste prioritaire sur le report automatique.
+Le rythme est **cours les lundi, mardi, jeudi et vendredi ; mercredi FOAD de soutien sur plateforme**, hors jours fériés nationaux, sans inventer d’horaires ni de durées. Les vacances HETIC et les disponibilités restent à préciser. Les jours fériés utilisés proviennent de [Service Public, calendrier 2027](https://www.service-public.gouv.fr/particuliers/actualites/A19019). Une date individuelle explicitement renseignée reste prioritaire sur le report automatique.
 
-Les rendez-vous clients sont attribués à **Brontis et Antoine**. Le Demo Day et la captation sont proposés le **29 juin**, avec les retours le **30 juin** ; chaque équipe d’étudiants présente et défend son MVP.
+Les rendez-vous clients sont attribués à **Brontis et Antoine**. Le Demo Day et la captation sont proposés le **29 juin**, avec les retours regroupés le **29 juin** ; le mercredi 30 reste en FOAD ; chaque équipe d’étudiants présente et défend son MVP.
+
+## Mercredi FOAD et cours de soutien
+
+La FOAD du mercredi comprend quatre activités-types à décliner selon les difficultés : cours de soutien et rappels ciblés, exercices corrigés, QCM/rappel actif, puis dépôt d’une preuve et bilan. Le référent proposé prépare ou suit les retours ; la FOAD n’est pas une journée complète de cours synchrone pour l’intervenant.
+
+Sur le calendrier actuel : **99 jours de cours, 26 mercredis FOAD et 104 activités-types proposées**, quatre par mercredi. Les 48 contenus du programme sont conservés. Les journées de cours sans bloc spécifique reprennent l’objectif de la semaine avec un intervenant proposé ; elles ne deviennent pas des journées d’autonomie. Les blocs calculés initialement un mercredi sont reportés au prochain jour de cours. Les dates explicites sont à vérifier avant de les valider.
+
+L’adresse de la plateforme reste à renseigner dans `rhythm.platformUrl` ; aucune plateforme ni statistique n’est automatiquement connectée. Un lien HTTP(S) renseigné rend le bouton d’accès visible. Les contenus et les travaux à déposer restent à préparer sur cette plateforme.
+
+Le [plan de charge exporté](docs/plan-charge-2027.md) distingue les jours de mobilisation en cours **C** des rattachements à un suivi FOAD **F**. La matrice de l’application propose quatre lectures : intervenants selon le rythme, cours/FOAD, contenus par intervenant et contenus par activité. Les coanimations ne créent pas de journées supplémentaires pour l’apprenant. Les heures, disponibilités et taux d’occupation restent à établir.
+
+Les métriques individuelles à renseigner par mois sont : jours de cours suivis, mercredis FOAD suivis, activités plateforme affectées et réalisées, minutes déclarées sur plateforme, objectifs de soutien affectés et validés. La preuve ou la trace est requise ; aucune valeur n’est préremplie. Les taux de participation ne sont calculés que pour les mois renseignés, en affichant leur couverture. Un mois absent n’est pas traité comme zéro ; un total affecté nul ne produit pas un taux artificiel. La participation et la réalisation d’une activité ne valident pas automatiquement une compétence.
+
+Les 30 % de Mously et les 5 % de contenu cyber restent distincts de cette répartition en jours. Le temps de retour FOAD doit être ventilé avec les durées réelles ; il n’est pas ajouté automatiquement aux pourcentages existants.
 
 ## Timeline, pourcentages et observations
 
@@ -60,18 +74,20 @@ L’[autocritique et le rééquilibrage](docs/autocritique-parcours.md) explique
 
 ## Plan de charge visuel
 
-La rubrique **Plan de charge**, accessible dans le menu, affiche une matrice sur les six mois. Les intervenants sont en lignes et les mois en colonnes. Les teintes montrent le nombre de blocs de chaque case ; les petites barres colorées distinguent cours, coaching, projet, cybersécurité et Demo Day. Les jalons M3, M5 et M6 restent visibles dans les en-têtes.
+La rubrique **Plan de charge**, accessible dans le menu, affiche une matrice sur les six mois. Les intervenants sont en lignes et les mois en colonnes. La vue initiale montre les jours de cours et les rattachements à un suivi FOAD. Les vues de contenus conservent les nombres de blocs, avec des barres distinguant les activités. Les jalons M3, M5 et M6 restent visibles dans les en-têtes.
 
-- **Par intervenant** : repérer les périodes où chaque personne, rôle ou collectif participe aux blocs prévus.
-- **Par activité** : retrouver la répartition mensuelle des cours, du coaching, du travail projet, de la cybersécurité et des démonstrations.
+- **Intervenants · rythme** : jours de cours et suivis FOAD proposés pour chaque personne ou rôle.
+- **Cours / FOAD** : répartition mensuelle des jours d’apprentissage.
+- **Contenus · intervenants** : retrouver les 48 blocs et leurs coanimations.
+- **Contenus · activités** : répartition des 48 contenus par type.
 - **Afficher les intitulés** : rendre les titres des blocs visibles directement dans les cases.
 - **Clic sur une case** : consulter la liste des interventions ; cliquer sur un bloc ouvre son détail pédagogique. Le bouton « Fermer » ramène le focus à la case sélectionnée.
 
 Les indicateurs distinguent les **blocs distincts** des **participations** : un atelier coanimé par deux intervenants compte une fois dans le total du parcours et une fois sur chacune de leurs lignes. Les totaux mensuels comptent les blocs distincts. Cette vue couvre tout le parcours et reste indépendante des filtres du calendrier.
 
-Il s’agit d’une répartition schématique en blocs. Les durées, disponibilités et capacités n’étant pas renseignées, les couleurs ne représentent pas un taux d’occupation ni une surcharge horaire. Les repères Mously à 30 % et cybersécurité à 5 % sont rappelés sans calculer de volume mensuel.
+Il s’agit d’une répartition schématique en jours ou en blocs selon la vue. Les durées, disponibilités et capacités n’étant pas renseignées, les couleurs ne représentent pas un taux d’occupation ni une surcharge horaire. Les repères Mously à 30 % et cybersécurité à 5 % sont rappelés sans calculer de volume mensuel.
 
-La matrice utilise les mêmes données que le planning. Modifier `planning-data.js` suffit à actualiser les visuels. Le calcul est dans `planning-model.js`, le rendu dans `workload.js` et les styles dans `workload.css`.
+La matrice utilise les mêmes données que le planning. Modifier `planning-data.js` suffit à actualiser les visuels. Le rythme, les affectations proposées et les activités FOAD sont centralisés dans `rhythm` ; le calcul est dans `planning-model.js`, le rendu dans `workload.js` et les styles dans `workload.css`.
 
 ## Design des applications, puis vibe coding
 
@@ -93,7 +109,7 @@ La rubrique « Cartes mentales » propose trois schémas :
 
 Les boutons permettent de passer d'un schéma à l'autre. Les schémas s'ouvrent en grand et se téléchargent en SVG, un format vectoriel réutilisable dans une présentation. Sur petit écran, ils se parcourent horizontalement.
 
-Le bouton **Imprimer / PDF** utilise l'impression du navigateur. Le planning reflète la vue et les filtres sélectionnés au moment de l'impression ; les trois cartes mentales sont incluses. Le schéma six mois et les exports CSV/Markdown sont régénérés à partir des données par `scripts/render-supports.cjs`. Pour un document complet de référence, utiliser aussi [le programme texte](docs/parcours-hetic.md).
+Le bouton **Imprimer / PDF** utilise l'impression du navigateur. Le planning reflète la vue et les filtres sélectionnés au moment de l'impression ; les trois cartes mentales sont incluses. Le schéma six mois et les exports CSV/Markdown, dont le plan de charge, sont régénérés à partir des données par `scripts/render-supports.cjs`. Pour un document complet de référence, utiliser aussi [le programme texte](docs/parcours-hetic.md).
 
 ## Modifier le projet depuis la console
 

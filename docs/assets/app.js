@@ -9,7 +9,7 @@
   })();
   const initialStart = calendar.isDate(plan.startDate) ? plan.startDate : null;
   const state = { view: 'course', index: 0, start: initialStart, cursor: initialStart || today, search: '', trainer: '', category: 'all' };
-  const categories = { cours: 'Cours & ateliers', coaching: 'Coaching', projet: 'Projet & clients', cyber: 'Cybersécurité', demo: 'Demo Day' };
+  const categories = { cours: 'Cours & ateliers', coaching: 'Coaching', projet: 'Projet & clients', cyber: 'Cybersécurité', demo: 'Demo Day', foad: 'FOAD · soutien plateforme' };
   $('mously-share').textContent = String(plan.allocation.mouslyTotal);
   $('cyber-share').textContent = String(plan.allocation.cyber);
   $('allocation-note').textContent = `Mously : ${plan.allocation.mouslyTotal} % du volume total (${plan.allocation.cours} % théorie/pratique + ${plan.allocation.coaching} % coaching). Contenu cybersécurité : ${plan.allocation.cyber} % du volume total ; affectation des heures aux intervenants à préciser.`;
@@ -20,7 +20,7 @@
     if (content !== undefined) node.textContent = content;
     return node;
   };
-  const trainerNames = session => session.trainers.map(id => plan.trainers.find(person => person.id === id)?.name || id).join(' · ');
+  const trainerNames = session => (session.category === 'foad' ? 'Référent suivi · ' : '') + session.trainers.map(id => plan.trainers.find(person => person.id === id)?.name || id).join(' · ');
 
   function selectMonth(index) {
     state.index = index;
@@ -36,8 +36,8 @@
 
   function openIntervention(session) {
     selectMonth(session.month - 1);
-    const date = calendar.sessionDate(session, state.start, plan.calendar?.holidays);
-    $('dialog-period').textContent = `HETIC · M${session.month} · ${categories[session.category]}${date ? ` · ${format(date)}${session.date ? ' · date renseignée' : ' · date proposée'}` : ' · date à préciser'}`;
+    const date = calendar.sessionDate(session, state.start, plan.calendar?.holidays, plan.rhythm);
+    $('dialog-period').textContent = `HETIC · M${session.month} · ${categories[session.category]}${date ? ` · ${format(date)}${session.date && !session.deliveryDay ? ' · date renseignée' : ' · date proposée'}` : ' · date à préciser'}`;
     $('dialog-title').textContent = session.title;
     $('dialog-trainers').textContent = trainerNames(session);
     $('dialog-description').textContent = session.description;
@@ -51,7 +51,7 @@
 
   function interventionCard(session) {
     const person = plan.trainers.find(item => item.id === session.trainers[0]);
-    const date = calendar.sessionDate(session, state.start, plan.calendar?.holidays);
+    const date = calendar.sessionDate(session, state.start, plan.calendar?.holidays, plan.rhythm);
     const card = element('button', `intervention-card category-${session.category}`);
     card.type = 'button';
     card.style.setProperty('--event-color', person?.color || '#6c58d5');
@@ -62,7 +62,7 @@
     top.append(element('span', 'intervention-type', categories[session.category]), element('span', 'intervention-dot', ''));
     const footer = element('span', 'intervention-person');
     footer.append(element('i', '', person?.initials || 'EQ'), element('span', '', trainerNames(session)));
-    card.append(top, element('strong', '', session.title), element('span', 'intervention-school', 'HETIC · Parcours projet'), element('span', 'intervention-timing', date ? `${format(date)} · ${session.date ? 'date renseignée' : 'proposé'}` : 'Date et horaires à préciser'));
+    card.append(top, element('strong', '', session.title), element('span', 'intervention-school', 'HETIC · Parcours projet'), element('span', 'intervention-timing', date ? `${format(date)} · ${session.date && !session.deliveryDay ? 'date renseignée' : 'proposé'}` : 'Date et horaires à préciser'));
     if (session.addition) card.append(element('span', 'intervention-extra', 'Complément proposé'));
     card.append(footer);
     card.addEventListener('click', () => openIntervention(session));
@@ -79,7 +79,7 @@
     header.setAttribute('aria-controls', 'month-detail');
     header.append(element('span', 'column-kicker', 'PARCOURS PROJET'), element('strong', 'column-number', `M${index + 1}`), element('span', 'column-stage', plan.months[index].title));
     if (state.start) header.append(element('span', 'column-dates', `${format(calendar.addMonths(state.start, index))} → ${format(calendar.addDays(calendar.addMonths(state.start, index + 1), -1))}`));
-    header.append(element('small', '', `${sessions.length} bloc${sessions.length > 1 ? 's' : ''} proposé${sessions.length > 1 ? 's' : ''}`));
+    header.append(element('small', '', `${sessions.length} élément${sessions.length > 1 ? 's' : ''} proposé${sessions.length > 1 ? 's' : ''}`));
     header.addEventListener('click', () => {
       selectMonth(index);
       $('previous-period').disabled = index === 0;
@@ -106,7 +106,7 @@
     column.dataset.date = date;
     column.setAttribute('aria-label', format(date, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }));
     const header = element('header', 'calendar-column-heading');
-    header.append(element('span', 'column-kicker', format(date, { weekday: 'long' })), element('strong', 'column-number', format(date, { day: '2-digit' })), element('span', 'column-stage', format(date, { month: 'long' })), element('small', '', `${sessions.length} bloc${sessions.length > 1 ? 's' : ''}`));
+    header.append(element('span', 'column-kicker', format(date, { weekday: 'long' })), element('strong', 'column-number', format(date, { day: '2-digit' })), element('span', 'column-stage', format(date, { month: 'long' })), element('small', '', `${sessions.length} élément${sessions.length > 1 ? 's' : ''}`));
     if (date === today) header.append(element('span', 'today-label', 'Aujourd’hui'));
     const body = element('div', 'calendar-column-body');
     sessions.forEach(session => body.append(interventionCard(session)));
@@ -127,7 +127,7 @@
   }
 
   function render(focus = false) {
-    const sessions = calendar.filterSessions(plan.sessions, state, plan.trainers);
+    const sessions = calendar.filterSessions(calendar.scheduleSessions({ ...plan, startDate: state.start || plan.startDate }), state, plan.trainers);
     const grid = $('calendar-grid');
     grid.replaceChildren();
     const dated = state.view !== 'course' && Boolean(state.start);
@@ -136,8 +136,8 @@
     if (dated) {
       const days = calendar.daysInView(state.view, state.cursor);
       grid.style.setProperty('--column-count', String(days.length));
-      visible = sessions.filter(session => days.includes(calendar.sessionDate(session, state.start, plan.calendar?.holidays)));
-      days.forEach(date => grid.append(dayColumn(date, visible.filter(session => calendar.sessionDate(session, state.start, plan.calendar?.holidays) === date))));
+      visible = sessions.filter(session => days.includes(calendar.sessionDate(session, state.start, plan.calendar?.holidays, plan.rhythm)));
+      days.forEach(date => grid.append(dayColumn(date, visible.filter(session => calendar.sessionDate(session, state.start, plan.calendar?.holidays, plan.rhythm) === date))));
       $('period-label').textContent = state.view === 'week'
         ? `${format(days[0])} → ${format(days.at(-1), { day: 'numeric', month: 'short', year: 'numeric' })}`
         : format(state.cursor, { month: 'long', year: 'numeric' });
@@ -148,7 +148,7 @@
       indexes.forEach(index => grid.append(monthColumn(index, visible.filter(session => session.month === index + 1))));
       $('period-label').textContent = state.view === 'course' ? 'Parcours complet · M1 à M6' : `M${state.index + 1} · ${plan.months[state.index].title}`;
     }
-    $('result-count').textContent = `${visible.length} bloc${visible.length > 1 ? 's' : ''} proposé${visible.length > 1 ? 's' : ''}`;
+    $('result-count').textContent = `${visible.length} élément${visible.length > 1 ? 's' : ''} proposé${visible.length > 1 ? 's' : ''}`;
     $('calendar-empty').hidden = visible.length > 0;
     $('calendar-scroll').hidden = !dated && visible.length === 0;
     $('previous-period').disabled = !dated && state.index === 0;

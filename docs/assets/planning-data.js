@@ -1,5 +1,6 @@
-// Source du planning HETIC : 1er janvier au 30 juin 2027.
-// Répartitions et dates d’intervention proposées ; acquisitions individuelles à documenter.
+// Planning HETIC : 1er janvier au 30 juin 2027.
+// Cours lundi/mardi/jeudi/vendredi ; mercredi FOAD de soutien sur plateforme.
+// Affectations, dates et volumes à confirmer ; aucune réalisation n’est préremplie.
 window.HETIC_PLANNING = {
   "school": "HETIC",
   "startDate": "2027-01-01",
@@ -41,7 +42,16 @@ window.HETIC_PLANNING = {
             "product-3": null
           },
           "clientTrials": null,
-          "evidence": ""
+          "evidence": "",
+          "delivery": {
+            "courseAttended": null,
+            "foadCompleted": null,
+            "platformAssigned": null,
+            "platformCompleted": null,
+            "platformMinutes": null,
+            "supportObjectives": null,
+            "supportValidated": null
+          }
         }
       },
       {
@@ -73,7 +83,16 @@ window.HETIC_PLANNING = {
             "product-3": null
           },
           "clientTrials": null,
-          "evidence": ""
+          "evidence": "",
+          "delivery": {
+            "courseAttended": null,
+            "foadCompleted": null,
+            "platformAssigned": null,
+            "platformCompleted": null,
+            "platformMinutes": null,
+            "supportObjectives": null,
+            "supportValidated": null
+          }
         }
       },
       {
@@ -105,7 +124,16 @@ window.HETIC_PLANNING = {
             "product-3": null
           },
           "clientTrials": null,
-          "evidence": ""
+          "evidence": "",
+          "delivery": {
+            "courseAttended": null,
+            "foadCompleted": null,
+            "platformAssigned": null,
+            "platformCompleted": null,
+            "platformMinutes": null,
+            "supportObjectives": null,
+            "supportValidated": null
+          }
         }
       },
       {
@@ -137,7 +165,16 @@ window.HETIC_PLANNING = {
             "product-3": null
           },
           "clientTrials": null,
-          "evidence": ""
+          "evidence": "",
+          "delivery": {
+            "courseAttended": null,
+            "foadCompleted": null,
+            "platformAssigned": null,
+            "platformCompleted": null,
+            "platformMinutes": null,
+            "supportObjectives": null,
+            "supportValidated": null
+          }
         }
       },
       {
@@ -169,7 +206,16 @@ window.HETIC_PLANNING = {
             "product-3": null
           },
           "clientTrials": null,
-          "evidence": ""
+          "evidence": "",
+          "delivery": {
+            "courseAttended": null,
+            "foadCompleted": null,
+            "platformAssigned": null,
+            "platformCompleted": null,
+            "platformMinutes": null,
+            "supportObjectives": null,
+            "supportValidated": null
+          }
         }
       },
       {
@@ -201,7 +247,16 @@ window.HETIC_PLANNING = {
             "product-3": null
           },
           "clientTrials": null,
-          "evidence": ""
+          "evidence": "",
+          "delivery": {
+            "courseAttended": null,
+            "foadCompleted": null,
+            "platformAssigned": null,
+            "platformCompleted": null,
+            "platformMinutes": null,
+            "supportObjectives": null,
+            "supportValidated": null
+          }
         }
       }
     ],
@@ -1163,7 +1218,7 @@ window.HETIC_PLANNING = {
       "description": "Documenter les retours et distinguer intérêt exprimé, usage et engagement observé.",
       "addition": false,
       "dayOffset": 8,
-      "date": "2027-06-30",
+      "date": "2027-06-29",
       "clientMeeting": true
     },
     {
@@ -1394,6 +1449,146 @@ window.HETIC_PLANNING = {
       "2027-05-08": "Victoire 1945",
       "2027-05-17": "Lundi de Pentecôte"
     },
-    "assumption": "Trame proposée du lundi au vendredi, hors jours fériés nationaux ; vacances HETIC à préciser."
+    "assumption": "Cours lundi, mardi, jeudi et vendredi ; mercredi FOAD de soutien. Hors jours fériés nationaux ; vacances HETIC à préciser."
+  },
+  "rhythm": {
+    "courseWeekdays": [
+      1,
+      2,
+      4,
+      5
+    ],
+    "foadWeekday": 3,
+    "platformLabel": "Plateforme de cours de soutien",
+    "platformUrl": null,
+    "supportActivities": [
+      "Cours de soutien et rappels ciblés",
+      "Exercices corrigés de remédiation",
+      "QCM et rappel actif",
+      "Dépôt d’une preuve et bilan des difficultés"
+    ],
+    "monthlyAssignments": [
+      {
+        "courseLeads": {
+          "1": [
+            "mously"
+          ],
+          "2": [
+            "michel"
+          ],
+          "4": [
+            "dany"
+          ],
+          "5": [
+            "mously"
+          ]
+        },
+        "supportReferents": [
+          "michel",
+          "mously",
+          "dany"
+        ]
+      },
+      {
+        "courseLeads": {
+          "1": [
+            "antoine"
+          ],
+          "2": [
+            "michel"
+          ],
+          "4": [
+            "antoine"
+          ],
+          "5": [
+            "mously"
+          ]
+        },
+        "supportReferents": [
+          "antoine",
+          "michel"
+        ]
+      },
+      {
+        "courseLeads": {
+          "1": [
+            "antoine"
+          ],
+          "2": [
+            "yaaqoub"
+          ],
+          "4": [
+            "dany"
+          ],
+          "5": [
+            "michel"
+          ]
+        },
+        "supportReferents": [
+          "antoine",
+          "yaaqoub"
+        ]
+      },
+      {
+        "courseLeads": {
+          "1": [
+            "yaaqoub"
+          ],
+          "2": [
+            "sion"
+          ],
+          "4": [
+            "antoine"
+          ],
+          "5": [
+            "mously"
+          ]
+        },
+        "supportReferents": [
+          "yaaqoub",
+          "sion"
+        ]
+      },
+      {
+        "courseLeads": {
+          "1": [
+            "technique"
+          ],
+          "2": [
+            "yaaqoub"
+          ],
+          "4": [
+            "sion"
+          ],
+          "5": [
+            "mously"
+          ]
+        },
+        "supportReferents": [
+          "technique",
+          "mously"
+        ]
+      },
+      {
+        "courseLeads": {
+          "1": [
+            "dany"
+          ],
+          "2": [
+            "mously"
+          ],
+          "4": [
+            "dany"
+          ],
+          "5": [
+            "mously"
+          ]
+        },
+        "supportReferents": [
+          "mously",
+          "dany"
+        ]
+      }
+    ]
   }
 };

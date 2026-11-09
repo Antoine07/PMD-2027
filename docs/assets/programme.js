@@ -7,11 +7,11 @@
     let view = 'days';
     let selectedMonth = '';
     const days = model.courseDays(plan);
-    const weeks = model.courseWeeks(plan.startDate, plan.months.length).map(week => ({ ...week, goal: plan.weeklyGoals.find(item => item.number === week.number), sessions: plan.sessions.filter(session => { const date = model.sessionDate(session, plan.startDate, plan.calendar?.holidays); return date >= week.start && date <= week.end; }) }));
+    const weeks = model.courseWeeks(plan.startDate, plan.months.length).map(week => ({ ...week, goal: plan.weeklyGoals.find(item => item.number === week.number), sessions: plan.sessions.filter(session => { const date = model.sessionDate(session, plan.startDate, plan.calendar?.holidays, plan.rhythm); return date >= week.start && date <= week.end; }) }));
     function modules(sessions) {
       const list = make('div', 'programme-module-list');
       sessions.forEach(session => { const button = make('button', '', session.title); button.type = 'button'; button.setAttribute('aria-haspopup', 'dialog'); button.setAttribute('aria-controls', 'intervention-dialog'); button.title = session.trainers.map(id => plan.trainers.find(person => person.id === id)?.name || id).join(' · '); button.addEventListener('click', () => onSelect(session)); list.append(button); });
-      if (!sessions.length) list.append(make('span', 'programme-empty', 'Travail d’équipe ; intervention à positionner si nécessaire.'));
+      if (!sessions.length) list.append(make('span', 'programme-empty', 'Cours et ateliers encadrés de la semaine : contenus à détailler.'));
       return list;
     }
     function render() {
@@ -23,11 +23,17 @@
         ['JOUR', 'ÉTAPE', 'INTERVENTIONS ET RESPONSABLES', 'TRAVAIL PROPOSÉ', 'PREUVE ET ARGUMENTATION'].forEach(text => { const th = make('th', '', text); th.scope = 'col'; heading.append(th); }); head.append(heading); table.append(head);
         const body = make('tbody');
         days.filter(day => !selectedMonth || day.month === Number(selectedMonth)).forEach(day => {
-          const row = make('tr', day.active ? '' : 'programme-nonworking'); const th = make('th', 'programme-week'); th.scope = 'row';
+          const row = make('tr', !day.active ? 'programme-nonworking' : day.modality === 'foad' ? 'programme-foad' : 'programme-course'); const th = make('th', 'programme-week'); th.scope = 'row';
           th.append(make('strong', '', model.parse(day.date).toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'short', timeZone: 'UTC' })), make('span', '', `S${day.week} · M${day.month}`)); row.append(th, make('td', 'programme-focus', day.focus));
-          const sessionCell = make('td'); sessionCell.append(modules(day.sessions));
-          if (!day.active) sessionCell.replaceChildren(make('span', 'programme-empty', 'Aucune activité imposée'));
-          else if (day.sessions.length) sessionCell.append(make('small', 'programme-people', [...new Set(day.sessions.flatMap(session => session.trainers))].map(id => plan.trainers.find(person => person.id === id)?.name || id).join(' · ')));
+          const sessionCell = make('td');
+          if (!day.active) sessionCell.append(make('span', 'programme-empty', 'Aucune activité imposée'));
+          else {
+            const responsible = day.modality === 'foad' ? day.supportTrainers : day.courseTrainers;
+            if (day.sessions.length) sessionCell.append(modules(day.sessions));
+            else sessionCell.append(make('strong', 'programme-modality', day.modality === 'foad' ? plan.rhythm.platformLabel : 'Cours et ateliers de la semaine'));
+            sessionCell.append(make('small', 'programme-people', (day.modality === 'foad' ? 'Référent de suivi : ' : 'Intervenants proposés : ') + responsible.map(id => plan.trainers.find(person => person.id === id)?.name || id).join(' · ')));
+            if (day.modality === 'foad') day.platformActivities.forEach(activity => sessionCell.append(make('span', 'programme-platform-activity', activity)));
+          }
           const work = make('td', '', day.work); const proof = make('td'); proof.append(make('strong', 'programme-proof', day.deliverable), make('p', 'programme-defense', day.defense)); row.append(sessionCell, work, proof); body.append(row);
         }); table.append(body); target.append(table);
       } else if (view === 'weeks') {
@@ -39,8 +45,12 @@
           const row = make('tr'); const th = make('th', 'programme-week'); th.scope = 'row';
           th.append(make('strong', '', `S${week.number}`), make('span', '', `${format(week.start)} → ${format(week.end)}`)); if (week.partial) th.append(make('small', '', 'Semaine partielle')); row.append(th);
           row.append(make('td', 'programme-focus', week.goal?.title || 'Programme à préciser'));
-          const sessions = make('td'); sessions.append(modules(week.sessions));
-          const people = [...new Set(week.sessions.flatMap(session => session.trainers))].map(id => plan.trainers.find(person => person.id === id)?.name || id).join(' · '); if (people) sessions.append(make('small', 'programme-people', people)); row.append(sessions);
+          const sessions = make('td');
+          if (days.some(day => day.week === week.number && day.active)) sessions.append(modules(week.sessions));
+          else sessions.append(make('span', 'programme-empty', 'Aucune activité imposée sur cette semaine partielle.'));
+          const support = days.filter(day => day.week === week.number && day.modality === 'foad');
+          if (support.length) sessions.append(make('p', 'programme-foad-note', 'Mercredi : FOAD de soutien sur plateforme · suivi : ' + support.flatMap(day => day.supportTrainers).map(id => plan.trainers.find(person => person.id === id)?.name || id).join(' · ')));
+          const people = [...new Set(days.filter(day => day.week === week.number).flatMap(day => [...day.courseTrainers, ...day.supportTrainers]))].map(id => plan.trainers.find(person => person.id === id)?.name || id).join(' · '); if (people) sessions.append(make('small', 'programme-people', people)); row.append(sessions);
           const work = make('td'); work.append(make('p', '', week.goal?.work || ''), make('strong', 'programme-proof', week.goal?.deliverable || '')); row.append(work, make('td', 'programme-defense', week.goal?.defense || '')); body.append(row);
         });
         table.append(body); target.append(table);
@@ -53,13 +63,15 @@
           card.append(make('p', 'eyebrow', `M${index + 1} · ${format(start)} → ${format(end)}`), make('h4', '', plan.learning.months[index].milestone));
           const selected = weeks.filter(week => week.month === index + 1);
           const list = make('ol'); selected.forEach(week => list.append(make('li', '', `S${week.number} · ${week.goal?.title || 'À préciser'}`))); card.append(list);
+          const rhythm = model.deliveryPlan(plan).months[index];
+          card.append(make('p', 'programme-foad-note', `${rhythm.courses} jours de cours · ${rhythm.foad} mercredis FOAD · ${rhythm.activities} activités plateforme proposées`));
           card.append(make('p', 'programme-proof', plan.learning.months[index].proof));
           if (view === 'months') { card.append(make('p', '', month.program)); card.append(modules(plan.sessions.filter(session => session.month === index + 1))); }
           const button = make('button', 'calendar-button', 'Voir ce mois dans le calendrier →'); button.type = 'button'; button.addEventListener('click', () => onMonth(index)); card.append(button); grid.append(card);
         }); target.append(grid);
       }
       $('programme-month-filter').hidden = view === 'course';
-      $('programme-status').textContent = `${weeks.length} semaines calendaires, dont ${weeks.filter(week => week.partial).length} partielles · dates d’intervention proposées`;
+      $('programme-status').textContent = `${weeks.length} semaines calendaires, dont ${weeks.filter(week => week.partial).length} partielles · ${days.filter(day => day.modality === 'cours').length} jours de cours et ${days.filter(day => day.modality === 'foad').length} mercredis FOAD · dates proposées`;
     }
     $('programme-month-filter').addEventListener('change', event => { selectedMonth = event.target.value; render(); });
     document.querySelectorAll('[data-programme-view]').forEach(button => button.addEventListener('click', () => { view = button.dataset.programmeView; render(); }));

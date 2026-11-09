@@ -10,9 +10,11 @@
       return node;
     };
     const phases = ['Design & cadrage', 'Bases & application', 'Premier MVP', 'Pilote client', 'Soutenance blanche', 'Demo Day'];
-    const state = { axis: 'trainer', selection: null, data: null };
+    const state = { axis: 'staff', selection: null, data: null };
     const buttons = [];
-    const blockLabel = count => `${count} bloc${count > 1 ? 's' : ''}`;
+    const isDelivery = () => ['staff', 'rhythm'].includes(state.axis);
+    const byPerson = () => ['staff', 'trainer'].includes(state.axis);
+    const blockLabel = count => `${count} ${isDelivery() ? 'jour' : 'bloc'}${count > 1 ? 's' : ''}`;
 
     function updateSelection() {
       buttons.forEach(button => {
@@ -53,7 +55,7 @@
       button.setAttribute('aria-expanded', 'false');
       button.setAttribute('aria-label', `${row.label}, M${cell.month}, ${blockLabel(cell.count)}. Afficher les interventions.`);
       const label = make('span', 'load-cell-label');
-      label.append(make('strong', '', String(cell.count)), make('span', '', cell.count > 1 ? 'blocs' : 'bloc'));
+      label.append(make('strong', '', String(cell.count)), make('span', '', isDelivery() ? 'jours' : cell.count > 1 ? 'blocs' : 'bloc'));
       button.append(label);
       const bar = make('span', 'load-stack');
       bar.setAttribute('aria-hidden', 'true');
@@ -83,8 +85,13 @@
     }
 
     function render() {
-      state.data = model.buildWorkload(plan.sessions, plan.trainers, { axis: state.axis, categories, monthCount: plan.months.length });
+      state.data = isDelivery() ? model.buildDeliveryWorkload(plan, state.axis) : model.buildWorkload(plan.sessions, plan.trainers, { axis: state.axis, categories: Object.fromEntries(Object.entries(categories).filter(([id]) => id !== 'foad')), monthCount: plan.months.length });
       const data = state.data;
+      const activeCategories = isDelivery() ? { cours: 'Jours de cours encadrés', foad: 'Suivis FOAD · à ventiler' } : Object.fromEntries(Object.entries(categories).filter(([id]) => id !== 'foad'));
+      const key = $('load-category-key'); key.replaceChildren();
+      Object.entries(activeCategories).forEach(([id, title]) => { const item = make('span'); item.append(make('i', `type-${id}`), make('span', '', title)); key.append(item); });
+      $('load-unit-label').textContent = isDelivery() ? 'jours d’apprentissage distincts' : 'blocs pédagogiques distincts';
+      $('load-participation-label').textContent = isDelivery() ? 'mobilisations · cours ou suivi FOAD' : 'participations d’intervenants';
       $('load-block-count').textContent = String(data.uniqueCount);
       $('load-participation-count').textContent = String(data.participationCount);
       $('load-contributor-count').textContent = String(data.contributorCount);
@@ -92,7 +99,7 @@
       $('load-peak-count').textContent = `${blockLabel(data.peakCount)} ${data.peakCount > 1 ? 'distincts' : 'distinct'}`;
       $('load-mously-allocation').textContent = `${plan.allocation.mouslyTotal} % Mously`;
       $('load-cyber-allocation').textContent = `${plan.allocation.cyber} % cybersécurité`;
-      $('load-view-status').textContent = `Vue par ${state.axis === 'trainer' ? 'intervenant' : 'activité'} · parcours complet · ${blockLabel(data.uniqueCount)} distincts`;
+      $('load-view-status').textContent = `${isDelivery() ? 'Rythme pédagogique' : 'Contenus du programme'} · ${blockLabel(data.uniqueCount)} distincts · suivi FOAD distinct d’une présence en cours`;
       document.querySelectorAll('[data-load-axis]').forEach(button => {
         const selected = button.dataset.loadAxis === state.axis;
         button.classList.toggle('selected', selected);
@@ -101,10 +108,10 @@
       const table = $('load-table');
       table.replaceChildren();
       buttons.length = 0;
-      table.append(make('caption', 'visually-hidden', `Répartition des blocs par ${state.axis === 'trainer' ? 'intervenant' : 'activité'} sur les six mois. Les nombres représentent des blocs pédagogiques, sans durée attribuée.`));
+      table.append(make('caption', 'visually-hidden', `Répartition par ${byPerson() ? 'intervenant' : 'activité'} sur les six mois. ${isDelivery() ? 'Jours de mobilisation proposés, en cours ou en suivi FOAD, sans durée attribuée.' : 'Nombres de blocs, sans durée attribuée.'}`));
       const head = make('thead');
       const heading = make('tr');
-      const corner = make('th', 'load-name-heading', state.axis === 'trainer' ? 'INTERVENANTS' : 'ACTIVITÉS');
+      const corner = make('th', 'load-name-heading', byPerson() ? 'INTERVENANTS' : 'MODALITÉS / ACTIVITÉS');
       corner.scope = 'col'; heading.append(corner);
       data.months.forEach(month => {
         const th = make('th', `load-month-heading${[3, 5, 6].includes(month.month) ? ' milestone-month' : ''}`);
@@ -123,7 +130,7 @@
         const tr = make('tr');
         const label = make('th', 'load-row-name'); label.scope = 'row';
         const identity = make('span', 'load-identity');
-        const avatar = make('span', `load-avatar${state.axis === 'category' ? ` type-${row.id}` : ''}`, row.initials || '');
+        const avatar = make('span', `load-avatar${!byPerson() ? ` type-${row.id}` : ''}`, row.initials || '');
         if (row.color) avatar.style.setProperty('--load-person-color', row.color);
         avatar.setAttribute('aria-hidden', 'true');
         identity.append(avatar, make('span', '', row.label)); label.append(identity); tr.append(label);
@@ -133,12 +140,12 @@
           tr.append(td);
         });
         const td = make('td', 'load-row-total');
-        td.append(make('strong', '', String(row.total)), make('span', '', state.axis === 'trainer' ? 'participations' : 'blocs'));
+        td.append(make('strong', '', String(row.total)), make('span', '', isDelivery() ? 'mobilisations' : byPerson() ? 'participations' : 'blocs'));
         tr.append(td); body.append(tr);
       });
       table.append(body);
       const foot = make('tfoot'); const footRow = make('tr');
-      const footLabel = make('th', 'load-foot-label', 'Blocs distincts'); footLabel.scope = 'row'; footRow.append(footLabel);
+      const footLabel = make('th', 'load-foot-label', isDelivery() ? 'Jours distincts' : 'Blocs distincts'); footLabel.scope = 'row'; footRow.append(footLabel);
       data.months.forEach(month => footRow.append(make('td', '', String(month.count))));
       footRow.append(make('td', 'load-grand-total', String(data.uniqueCount))); foot.append(footRow); table.append(foot);
       updateSelection();

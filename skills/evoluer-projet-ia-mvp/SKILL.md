@@ -65,6 +65,8 @@ Prévoir un diagnostic et des bases individuelles en IA, Data, applications, mar
 
 Pour les graphiques, distinguer répartitions pédagogiques proposées, critères observés et validation des jalons. Afficher la couverture des critères et une trace des observations. Ne pas convertir un nombre de blocs, un calendrier ou une proportion de théorie/pratique en pourcentage de connaissances acquises. Confier les rendez-vous clients à Brontis et Antoine dans ce parcours.
 
+Respecter le rythme HETIC : cours lundi, mardi, jeudi et vendredi ; mercredi FOAD de soutien sur la plateforme, avec rappels, exercices corrigés, QCM/rappel actif et dépôt d’une preuve. Prévoir un référent de suivi proposé, sans compter toute la journée de FOAD comme une présence synchrone enseignante. Distinguer prévisions, participation déclarée, activités plateforme réalisées, temps déclaré, objectifs de soutien validés et acquis démontrés. Ne pas traiter un mois sans mesure comme un mois à zéro ni présenter une plateforme comme connectée lorsque son adresse ou son intégration n’est pas fournie.
+
 Définir un segment accessible, un problème concret, sa fréquence, la solution actuelle et la personne qui décide ou paie. Réduire le MVP à un parcours complet qui apporte une valeur observable : entrée réelle, traitement, résultat utilisable et retour du client.
 
 Une prestation manuelle ou un prototype assisté peut vérifier le problème avant d'automatiser. Décrire honnêtement la part manuelle. Éviter l'infrastructure et les fonctions périphériques tant qu'elles ne sont pas nécessaires à l'usage ou à l'expérience en cours.
